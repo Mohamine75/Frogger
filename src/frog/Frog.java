@@ -6,6 +6,5 @@ import gameCommons.IFrog;
 public class Frog implements IFrog {
 	
 	private Game game;
-	private int a;
 
 }
