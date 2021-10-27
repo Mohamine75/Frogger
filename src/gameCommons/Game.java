@@ -101,8 +101,9 @@ public class Game {
 
 	public boolean testOffLimits() {
 		if(frog.getPosition().absc > this.width || frog.getPosition().absc < 0 || frog.getPosition().ord > this.height || frog.getPosition().ord < 0){
-
+			return false;
 		}
+		return true;
 	}
 
 	/**
