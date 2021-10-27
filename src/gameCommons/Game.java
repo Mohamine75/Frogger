@@ -99,6 +99,12 @@ public class Game {
 		return false;
 	}
 
+	public boolean testOffLimits() {
+		if(frog.getPosition().absc > this.width || frog.getPosition().absc < 0 || frog.getPosition().ord > this.height || frog.getPosition().ord < 0){
+
+		}
+	}
+
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
