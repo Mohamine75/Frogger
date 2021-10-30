@@ -77,7 +77,7 @@ public class Frog implements IFrog {
 				}
 				break;
 			case down:
-				if(position.absc+1 <= 0) {
+				if(position.ord-1 >= 0) {
 					this.position = new Case(position.absc, position.ord - 1);
 				}
 				break;
