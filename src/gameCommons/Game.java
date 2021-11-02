@@ -18,6 +18,11 @@ public class Game {
 
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
+
+	public IFrog getFrog() {
+		return frog;
+	}
+
 	private IFrog frog;
 	private IFroggerGraphics graphic;
 

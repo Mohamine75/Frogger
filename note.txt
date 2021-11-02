@@ -1,0 +1,4 @@
+En gros j'ai ajouté les méthodes à Environment et des methodes à Lane, le principale probleme c que les lanes sont
+ se creent mais on a que la grenouille et le testLose déconne il fait que de returne true ce fdp.
+ pour voir le truc tu vas dans Game.update() et tu mets le testLose en commentaire, d'ailleurs le testWin() marche
+ pas non plus, j'pense faut juste mieux comprendre la création et ajuster 2-3 trucs.
