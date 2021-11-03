@@ -22,23 +22,31 @@ public class Lane {
 	private int timer;
 
 	// TODO : Constructeur(s)
-	public Lane(Game game, boolean leftToRight, double density, int speed){
+	public Lane(Game game, int ord,double density){
 		this.game = game;
-		this.leftToRight = leftToRight;
 		this.density = density;
-		this.speed = speed;
+		this.ord = ord;
+		this.speed =1;
+	}
+	public Lane(Game game,int ord){
+		this.game = game;
+		this.leftToRight = game.randomGen.nextBoolean();
+		this.density = game.defaultDensity;
+		this.speed = (game.randomGen.nextInt(game.minSpeedInTimerLoops)+1);
+		this.ord = ord;
+		this.timer = 0;
 	}
 
 	// TODO : truc
 	public void update() {
-		timer++;
-		if (timer % speed == 0) {
-			moveCars();
+		this.timer++;
+		if (this.timer % speed == 0) {
+			moveCars(true);
+			mayAddCar();
+			this.timer =0;
+		}else{
+			moveCars(false);
 		}
-		for (Car c:cars) {
-			c.addToGraphics();
-		}
-		mayAddCar();
 	}
 		// TODO
 
@@ -84,15 +92,17 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public void moveCars(){
+	public void moveCars(boolean b){
 		for (Car c: cars) {
-			c.move();
+			c.move(b);
 			}
 		}
 		public boolean isSafe(Case c){
 			for(Car v:cars){
-				if(c.equals(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord))){
-					return false;
+				if(c.ord == v.getLeftPosition().ord){
+					if(c.absc >= v.getLeftPosition().absc && c.absc < v.getLeftPosition().absc +v.getLength()) {
+						return false;
+					}
 				}
 			}
 			return true;
