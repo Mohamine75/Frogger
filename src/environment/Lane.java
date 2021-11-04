@@ -98,13 +98,13 @@ public class Lane {
 			}
 		}
 		public boolean isSafe(Case c){
-			for(Car v:cars){
+			for(Car v:this.cars){
 				if(c.ord == v.getLeftPosition().ord){
-					if(c.absc >= v.getLeftPosition().absc && c.absc < v.getLeftPosition().absc +v.getLength()) {
-						return false;
+						if (c.absc >= v.getLeftPosition().absc && c.absc < v.getLeftPosition().absc + v.getLength()) {
+							return false;
+						}
 					}
 				}
-			}
 			return true;
 		}
 	}

@@ -17,8 +17,8 @@ public class Car {
 	//TODO Constructeur(s)
 	public Car(Game game, Case leftPosition, boolean leftToRight) {
 		this.length = game.randomGen.nextInt(2) + 1;
-		this.leftToRight = leftToRight;
 		this.leftPosition = leftPosition;
+		this.leftToRight = leftToRight;
 		this.game = game;
 	}
 
@@ -29,7 +29,7 @@ public class Car {
 	}
 
 	public Case getLeftPosition() {
-		return leftPosition;
+		return this.leftPosition;
 	}
 
 	public void setLength(int len) {
@@ -54,7 +54,7 @@ public class Car {
 			if (leftToRight) {
 				this.leftPosition = new Case(this.leftPosition.absc + 1, this.leftPosition.ord);
 			} else {
-				this.leftPosition = new Case(this.leftPosition.absc - length - 1, this.leftPosition.ord);
+				this.leftPosition = new Case(this.leftPosition.absc - 1, this.leftPosition.ord);
 			}
 		}
 		addToGraphics();
