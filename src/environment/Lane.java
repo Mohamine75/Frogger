@@ -2,8 +2,6 @@ package environment;
 
 import java.util.ArrayList;
 
-import gameCommons.IEnvironment;
-import environment.Environment;
 import util.Case;
 import gameCommons.Game;
 
@@ -11,43 +9,20 @@ public class Lane {
 	private Game game;
 	private int ord;
 	private int speed;
-
-	public ArrayList<Car> getCars() {
-		return cars;
-	}
-
-	private ArrayList<Car> cars = new ArrayList<>();
+	private ArrayList<Car> cars;
 	private boolean leftToRight;
 	private double density;
-	private int timer;
 
 	// TODO : Constructeur(s)
-	public Lane(Game game, int ord,double density){
-		this.game = game;
-		this.density = density;
-		this.ord = ord;
-		this.speed =1;
-	}
-	public Lane(Game game,int ord){
-		this.game = game;
-		this.leftToRight = game.randomGen.nextBoolean();
-		this.density = game.defaultDensity;
-		this.speed = (game.randomGen.nextInt(game.minSpeedInTimerLoops)+1);
-		this.ord = ord;
-		this.timer = 0;
+	public Lane(boolean leftToRight, double density, int speed, ArrayList<Car> cars){
+		this.leftToRight = leftToRight;
+		this.density =density;
+		this.speed = speed;
+		this.cars = cars;
 	}
 
-	// TODO : truc
 	public void update() {
-		this.timer++;
-		if (this.timer % speed == 0) {
-			moveCars(true);
-			mayAddCar();
-			this.timer =0;
-		}else{
-			moveCars(false);
-		}
-	}
+
 		// TODO
 
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
@@ -59,9 +34,17 @@ public class Lane {
 
 		// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
+	}
 
 	// TODO : ajout de methodes
-
+	public boolean isSafe(Case c){
+		for (Car car : cars){
+			if(car.getLeftPosition().equals(c) || new Case(car.getLeftPosition().absc+1,car.getLeftPosition().ord).equals(c)){
+				return false;
+			}
+		}
+		return true;
+	}
 	/*
 	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase() 
 	 */
@@ -71,7 +54,7 @@ public class Lane {
 	 * densit�, si la premi�re case de la voie est vide
 	 */
 	private void mayAddCar() {
-		if ( isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
+		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
 				cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
 			}
@@ -92,19 +75,4 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public void moveCars(boolean b){
-		for (Car c: cars) {
-			c.move(b);
-			}
-		}
-		public boolean isSafe(Case c){
-			for(Car v:this.cars){
-				if(c.ord == v.getLeftPosition().ord){
-						if (c.absc >= v.getLeftPosition().absc && c.absc < v.getLeftPosition().absc + v.getLength()) {
-							return false;
-						}
-					}
-				}
-			return true;
-		}
-	}
+}

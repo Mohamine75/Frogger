@@ -15,33 +15,24 @@ public class Car {
 	private final Color colorRtL = Color.BLUE;
 
 	//TODO Constructeur(s)
-	public Car(Game game, Case leftPosition, boolean leftToRight) {
-		this.length = game.randomGen.nextInt(2) + 1;
+	public Car(Game game, Case leftPosition, boolean leftToRight){
+		this.game = game;
 		this.leftPosition = leftPosition;
 		this.leftToRight = leftToRight;
-		this.game = game;
+		this.length = 2;
 	}
+	//TODO : ajout de methode
 
-	//TODO : ajout de methodes
-
-	public int getLength() {
-		return this.length;
-	}
 
 	public Case getLeftPosition() {
-		return this.leftPosition;
+		return leftPosition;
 	}
-
-	public void setLength(int len) {
-		this.length = len;
-	}
-
 
 	/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
-	public void addToGraphics() {
+	private void addToGraphics() {
 		for (int i = 0; i < length; i++) {
 			Color color = colorRtL;
-			if (this.leftToRight) {
+			if (this.leftToRight){
 				color = colorLtR;
 			}
 			game.getGraphic()
@@ -49,15 +40,4 @@ public class Car {
 		}
 	}
 
-	public void move(boolean b) {
-		if (b) {
-			if (leftToRight) {
-				this.leftPosition = new Case(this.leftPosition.absc + 1, this.leftPosition.ord);
-			} else {
-				this.leftPosition = new Case(this.leftPosition.absc - 1, this.leftPosition.ord);
-			}
-		}
-		addToGraphics();
-	}
 }
-
