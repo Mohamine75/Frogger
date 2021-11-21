@@ -26,7 +26,7 @@ public class Car {
 		this.game = game;
 		this.leftPosition = leftPosition;
 		this.leftToRight = leftToRight;
-		this.length = 2;
+		this.length =2;
 	}
 	public Car(Game game, Case leftPosition, boolean leftToRight, int length) {
 		this.game = game;
@@ -50,9 +50,9 @@ public class Car {
 	}
 	public void move(){
 		if(leftToRight) {
-			this.leftPosition = new Case(leftPosition.absc + 1,leftPosition.ord);
+			this.leftPosition = new Case(leftPosition.absc +1,leftPosition.ord);
 		}
-		this.leftPosition = new Case(leftPosition.absc - 1,leftPosition.ord);
+		else{this.leftPosition = new Case(leftPosition.absc - 1,leftPosition.ord);}
 	}
 	public boolean covers(Case c){
 		if(c.ord == leftPosition.ord){

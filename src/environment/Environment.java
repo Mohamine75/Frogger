@@ -7,21 +7,22 @@ import gameCommons.Game;
 import gameCommons.IEnvironment;
 
 public class Environment implements IEnvironment {
-    Game game;
-    private ArrayList<Lane> lanes = new ArrayList<Lane>();
+     private final Game game;
+     private ArrayList<Lane> lanes;
 	//TODO
     public Environment(Game game){
         this.game = game;
         this.lanes= new ArrayList<>();
         lanes.add(new Lane(game,0));
-        for (int i = 0; i < game.height -1; i++) {
-            lanes.add(new Lane(game, i, 2, true, game.defaultDensity));
+        for (int i = 1; i < game.height -1; i++) {
+
+            lanes.add(new Lane(game, i, game.randomGen.nextInt(1)+1,game.randomGen.nextBoolean() , game.defaultDensity));
         }
         lanes.add(new Lane(game, game.height));
     }
 
-        public boolean isWinningPosition(Case c){
-            return c.ord == game.height;
+    public boolean isWinningPosition(Case c){
+            return c.ord == lanes.size()-1;
         }
 
     public boolean isSafe(Case c){

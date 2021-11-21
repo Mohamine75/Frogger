@@ -3,6 +3,7 @@ package gameCommons;
 import java.awt.Color;
 import java.util.Random;
 
+import frog.Frog;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
 
@@ -104,13 +105,13 @@ public class Game {
 		return false;
 	}
 
-	public boolean testOffLimits() {
+	/*public boolean testOffLimits() {
 		if(frog.getPosition().absc > this.width || frog.getPosition().absc < 0 || frog.getPosition().ord > this.height || frog.getPosition().ord < 0){
 			int a = 0;
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de

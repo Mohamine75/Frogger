@@ -12,6 +12,7 @@ public class Lane {
 	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
+	private int compteur = 0;
 
 	public Lane(Game game, int ord) {
 		this.game = game;
@@ -44,19 +45,19 @@ public class Lane {
 		// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
 	public void update() {
-		for (int i = 0; i < 1000000000; i++) {
-			mayAddCar();
-			if(i%speed==0){
-				for(Car c : cars){
+		compteur++;
+			if (compteur  == speed) {
+				for (Car c : cars) {
 					c.move();
 				}
+				this.compteur =0;
 			}
-			for (Car c: cars) {
+			mayAddCar();
+			for (Car c : cars) {
 				c.addToGraphics();
 			}
 
 		}
-	}
 
 	// TODO : ajout de methodes
 
