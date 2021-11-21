@@ -9,19 +9,28 @@ public class Lane {
 	private Game game;
 	private int ord;
 	private int speed;
-	private ArrayList<Car> cars;
+	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
 
-	// TODO : Constructeur(s)
-	public Lane(boolean leftToRight, double density, int speed, ArrayList<Car> cars){
-		this.leftToRight = leftToRight;
-		this.density =density;
-		this.speed = speed;
-		this.cars = cars;
+	public Lane(Game game, int ord) {
+		this.game = game;
+		this.ord = ord;
+		this.density = 0;
+		this.leftToRight = true;
+		this.cars = new ArrayList<Car>();
+		this.speed = 0;
 	}
 
-	public void update() {
+	public Lane(Game game, int ord, int speed, boolean leftToRight, double density) {
+		this.game = game;
+		this.ord = ord;
+		this.speed = speed;
+		this.leftToRight = leftToRight;
+		this.density = density;
+	}
+	// TODO : Constructeur(s)
+
 
 		// TODO
 
@@ -34,17 +43,19 @@ public class Lane {
 
 		// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
+	public void update() {
+		for (int i = 0; i < 1000000000; i++) {
+			if(i%speed==0){
+				mayAddCar();
+				for(Car c : cars){
+					c.addToGraphics();
+				}
+			}
+		}
 	}
 
 	// TODO : ajout de methodes
-	public boolean isSafe(Case c){
-		for (Car car : cars){
-			if(car.getLeftPosition().equals(c) || new Case(car.getLeftPosition().absc+1,car.getLeftPosition().ord).equals(c)){
-				return false;
-			}
-		}
-		return true;
-	}
+
 	/*
 	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase() 
 	 */
@@ -74,5 +85,12 @@ public class Lane {
 		} else
 			return new Case(game.width, ord);
 	}
-
+	public boolean isSafe(Case c){
+		for(Car v : cars){
+			if(v.covers(c)){
+				return false;
+			}
+		}
+		return true;
+	}
 }
