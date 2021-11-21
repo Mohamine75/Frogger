@@ -45,12 +45,16 @@ public class Lane {
 
 	public void update() {
 		for (int i = 0; i < 1000000000; i++) {
+			mayAddCar();
 			if(i%speed==0){
-				mayAddCar();
 				for(Car c : cars){
-					c.addToGraphics();
+					c.move();
 				}
 			}
+			for (Car c: cars) {
+				c.addToGraphics();
+			}
+
 		}
 	}
 

@@ -15,7 +15,7 @@ public class Environment implements IEnvironment {
         this.lanes= new ArrayList<>();
         lanes.add(new Lane(game,0));
         for (int i = 0; i < game.height -1; i++) {
-            lanes.add(new Lane(game, i, 2, true, 1));
+            lanes.add(new Lane(game, i, 2, true, game.defaultDensity));
         }
         lanes.add(new Lane(game, game.height));
     }
@@ -34,6 +34,5 @@ public class Environment implements IEnvironment {
         for (Lane l : lanes) {
             l.update();
         }
-        isSafe(game.getFrog().getPosition());
     }
 }
