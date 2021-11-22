@@ -5,7 +5,7 @@ import gameCommons.IFrog;
 import util.Case;
 import util.Direction;
 
-public class FrogInf {
+public class FrogInf implements  IFrog{
 
 
         private Case position;
@@ -71,7 +71,7 @@ public class FrogInf {
                     break;
                 case up:
                     if(position.ord+1 <= game.height) {
-                       game.getEnvironment().add
+                       game.getEnvironment();
                         this.position = new Case(position.absc, position.ord + 1);
                     }
                     break;
@@ -84,4 +84,3 @@ public class FrogInf {
         }
     }
 
-}

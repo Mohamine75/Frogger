@@ -9,6 +9,7 @@ import environment.Environment;
 import frog.Frog;
 import environment.Environment;
 import environment.EnvInf;
+import frog.FrogInf;
 import givenEnvironment.GivenEnvironment;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
@@ -29,7 +30,7 @@ public class Main {
 		//Cr�ation de la partie
 		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
 		//Cr�ation et liason de la grenouille
-		IFrog frog = new Frog(game);
+		IFrog frog = new FrogInf(game);
 		game.setFrog(frog);
 		graphic.setFrog(frog);
 		//Cr�ation et liaison de l'environnement
