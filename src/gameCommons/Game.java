@@ -17,6 +17,10 @@ public class Game {
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
 
+	public IEnvironment getEnvironment() {
+		return environment;
+	}
+
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
 
@@ -96,14 +100,14 @@ public class Game {
 	 * 
 	 * @return true si la partie est gagn�e
 	 */
-	public boolean testWin() {
+	/*public boolean testWin() {
 		// TODO
 		if(environment.isWinningPosition(frog.getPosition())){
 			graphic.endGameScreen("Gagné !!");
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*public boolean testOffLimits() {
 		if(frog.getPosition().absc > this.width || frog.getPosition().absc < 0 || frog.getPosition().ord > this.height || frog.getPosition().ord < 0){
@@ -122,7 +126,6 @@ public class Game {
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		testLose();
-		testWin();
 	}
 
 }
