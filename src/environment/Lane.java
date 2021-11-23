@@ -30,8 +30,6 @@ public class Lane {
 		this.leftToRight = leftToRight;
 		this.density = density;
 	}
-	// TODO : Constructeur(s)
-
 
 		// TODO
 
@@ -90,6 +88,7 @@ public class Lane {
 		} else
 			return new Case(game.width, ord);
 	}
+
 	public boolean isSafe(Case c){
 		for(Car v : cars){
 			if(v.covers(c)){
@@ -98,4 +97,5 @@ public class Lane {
 		}
 		return true;
 	}
+
 }

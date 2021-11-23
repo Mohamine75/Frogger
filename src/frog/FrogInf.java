@@ -6,17 +6,16 @@ import util.Case;
 import util.Direction;
 
 public class FrogInf implements  IFrog{
-
-
         private Case position;
         private Direction direction;
         private Game game;
         private IFrog frog;
-
+        private Integer score;
 
         public FrogInf(Game game){
             this.position = new Case(game.width/2,0 );
             this.game = game;
+            this.score = 0;
         }
 
         public Case getPosition() {
@@ -56,7 +55,8 @@ public class FrogInf implements  IFrog{
 		}
 		this.direction = key; // on voulait faire comme a l'ancienne avec une tete qui tourne.
 	}*/
-        public void move(Direction key){
+
+    public void move(Direction key){
             switch (key){
                 case right:
                     if(position.absc+1 <= game.width) {
@@ -70,13 +70,15 @@ public class FrogInf implements  IFrog{
                     }
                     break;
                 case up:
-                    if(position.ord+1 <= game.height) {
-                       game.getEnvironment();
+                        this.score++;
+                        ;
                         this.position = new Case(position.absc, position.ord + 1);
-                    }
+                        game.getEnvironment().add();
+
                     break;
                 case down:
                     if(position.ord-1 >= 0) {
+                        this.score--;
                         this.position = new Case(position.absc, position.ord - 1);
                     }
                     break;
