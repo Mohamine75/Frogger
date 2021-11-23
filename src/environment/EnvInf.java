@@ -41,21 +41,21 @@ public class EnvInf implements  IEnvironment{
     public void decalageDown(){
          erased.add(lanes.get(0));
          lanes.remove(0);
-        for (Lane l :
-                lanes) {
+        for (Lane l : lanes) {
             l.setOrd(l.getOrd()-1);
         }
          System.out.println(toString());
     }
     public void decalageUp(){
-        lanes.add(erased.get(0));
-        ArrayList<Lane> tmp = new ArrayList<>();
+
         erased.remove(0);
         for (Lane l :
                 lanes) {
             l.setOrd(l.getOrd()+1);
          }
+        lanes.add(erased.get(0));
         System.out.println(toString());
+
         }
 
     public boolean isSafe(Case c){

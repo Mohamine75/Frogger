@@ -17,6 +17,7 @@ public interface IEnvironment {
 
 	public void add();
 	public void decalageDown();
+	public void decalageUp();
 	public String toString();
 	public ArrayList<Lane> getLanes();
 

@@ -59,42 +59,35 @@ public class FrogInf implements  IFrog{
 		this.direction = key; // on voulait faire comme a l'ancienne avec une tete qui tourne
 	}*/
 
-    public void move(Direction key){
-            switch (key){
-                case right:
-                    if(position.absc+1 <= game.width) {
-                        this.position = new Case(position.absc + 1, position.ord);
-                    }
-                    // Verif si en dehors de l'ecran
-                    break;
-                case left:
-                    if(position.absc-1 >= 0) {
-                        this.position = new Case(position.absc - 1, position.ord);
-                    }
-                    break;
-                case up:
-                        game.getEnvironment().add();
-                        this.score++;
-                        if(score > scoreMax){
-                            scoreMax = score;
-                        }
-                        if(score<3){
-                            position= new Case(position.absc,position.ord+1);
-                        }else{
-                            //position =  new Case(position.absc,position.ord+1);
-                            game.getEnvironment().decalageDown();
-                        }
+    public void move(Direction key) {
+        switch (key) {
+            case right:
+                if (position.absc + 1 <= game.width) {
+                    this.position = new Case(position.absc + 1, position.ord);
+                }
+                // Verif si en dehors de l'ecran
+                break;
+            case left:
+                if (position.absc - 1 >= 0) {
+                    this.position = new Case(position.absc - 1, position.ord);
+                }
+                break;
+            case up:
+                game.getEnvironment().add();
+                this.score++;
+                if (score > scoreMax) {
+                    scoreMax = score;
+                }
+                //position =  new Case(position.absc,position.ord+1);
+                game.getEnvironment().decalageDown();
+                break;
 
-                    break;
-                case down:
-
-                    if(position.ord-1 >= 1) {
-                        this.position = new Case(position.absc, position.ord - 1);
-                        this.score--;
-                        if(score>=3){
-                            game.getEnvironment().decalageDown();
-                        }
-                    }
+        case down:
+                        if(score>0)
+                            this.score--;
+                            if (score > 1) {
+                                game.getEnvironment().decalageDown();
+                            }
                     break;
             }
         }
