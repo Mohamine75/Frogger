@@ -1,7 +1,8 @@
 package gameCommons;
 
 import util.Case;
-
+import environment.Lane;
+import java.util.ArrayList;
 public interface IEnvironment {
 
 	/**
@@ -14,6 +15,12 @@ public interface IEnvironment {
 	 */
 	public boolean isSafe(Case c);
 
+	public void add();
+	public void decalageDown();
+	public String toString();
+	public ArrayList<Lane> getLanes();
+
+	public Lane getLane(int ord);
 	/**
 	 * Teste si la case est une case d'arrivee
 	 * 

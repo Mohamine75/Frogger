@@ -1,4 +1,4 @@
-package environment;
+/*package environment;
 
 import java.util.ArrayList;
 
@@ -31,9 +31,10 @@ public class Environment implements IEnvironment {
         }
         return true;
     }
+
     public void update () {
         for (Lane l : lanes) {
             l.update();
         }
     }
-}
+}*/

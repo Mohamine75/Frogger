@@ -1,4 +1,4 @@
-package frog;
+/*package frog;
 
 import gameCommons.Game;
 import gameCommons.IFrog;
@@ -29,35 +29,7 @@ public class Frog implements IFrog {
 	}
 
 	@Override
-	/* Alternatif avec mouvement de tête
-	public void move(Direction key) {
-		if(key == direction){
-				switch (direction){
-					case right:
-						if(position.absc+1 <= game.width) {
-							this.position = new Case(position.absc + 1, position.ord);
-						}
-						// Verif si en dehors de l'ecran
-						break;
-					case left:
-						if(position.absc-1 >= 0) {
-							this.position = new Case(position.absc - 1, position.ord);
-						}
-						break;
-					case up:
-						if(position.ord+1 <= game.height) {
-							this.position = new Case(position.absc, position.ord + 1);
-						}
-						break;
-					case down:
-						if(position.absc+1 <= game.height) {
-							this.position = new Case(position.absc, position.ord - 1);
-						}
-						break;
-			}
-		}
-		this.direction = key; // on voulait faire comme a l'ancienne avec une tete qui tourne.
-	}*/
+
 	public void move(Direction key){
 		switch (key){
 			case right:
@@ -83,4 +55,4 @@ public class Frog implements IFrog {
 				break;
 		}
 	}
-}
+}*/

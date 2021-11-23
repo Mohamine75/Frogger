@@ -3,9 +3,10 @@ package gameCommons;
 import java.awt.Color;
 import java.util.Random;
 
-import frog.Frog;
+//import frog.Frog;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import util.Direction;
 
 public class Game {
 
@@ -13,7 +14,9 @@ public class Game {
 
 	// Caracteristique de la partie
 	public final int width;
-	public final int height;
+
+
+	public  int height;
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
 
@@ -88,7 +91,7 @@ public class Game {
 	public boolean testLose() {
 		// TODO
 		if(!environment.isSafe(frog.getPosition())){
-			graphic.endGameScreen("Perdu");
+			graphic.endGameScreen("Perdu , score :" + frog.getScore());
 			return true;
 		}
 		return false;
