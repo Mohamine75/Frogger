@@ -56,7 +56,7 @@ public class FrogInf implements  IFrog{
 						break;
 			}
 		}
-		this.direction = key; // on voulait faire comme a l'ancienne avec une tete qui tourne.
+		this.direction = key; // on voulait faire comme a l'ancienne avec une tete qui tourne
 	}*/
 
     public void move(Direction key){
