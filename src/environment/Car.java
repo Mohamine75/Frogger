@@ -48,12 +48,14 @@ public class Car {
 			game.getGraphic().add(new Element(leftPosition.absc + i, leftPosition.ord, color));
 		}
 	}
+
 	public void move(){
 		if(leftToRight) {
 			this.leftPosition = new Case(leftPosition.absc +1,leftPosition.ord);
 		}
 		else{this.leftPosition = new Case(leftPosition.absc - 1,leftPosition.ord);}
 	}
+
 	public boolean covers(Case c){
 		if(c.ord == leftPosition.ord){
 			for (int i = 0; i < length; i++) {

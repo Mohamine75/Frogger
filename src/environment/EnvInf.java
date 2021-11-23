@@ -2,13 +2,16 @@ package environment;
 
 import java.util.ArrayList;
 
+import frog.FrogInf;
 import util.Case;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
+import util.Direction;
 
 public class EnvInf implements  IEnvironment{
     private final Game game;
     private ArrayList<Lane> lanes;
+    private FrogInf frog;
 
     //TODO
     public EnvInf(Game game){
@@ -35,6 +38,11 @@ public class EnvInf implements  IEnvironment{
    public void add(){
         lanes.add(new Lane(game, lanes.size(), game.randomGen.nextInt(10)+1,game.randomGen.nextBoolean() , 0.1));
    }
+
+   /*public void addGraphicLane(){
+        if(frog.getDirection() == Direction.up)
+            game.getGraphic().add(new Lane(game, lanes.size(), game.randomGen.nextInt(10)+1,game.randomGen.nextBoolean() , 0.1) );
+   }*/
 
    public boolean isWinningPosition(Case c){
         return false;

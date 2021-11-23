@@ -1,5 +1,6 @@
 package frog;
 
+import environment.EnvInf;
 import gameCommons.Game;
 import gameCommons.IFrog;
 import util.Case;
@@ -16,6 +17,7 @@ public class FrogInf implements  IFrog{
             this.position = new Case(game.width/2,0 );
             this.game = game;
             this.score = 0;
+            this.direction = Direction.down;
         }
 
         public Case getPosition() {
@@ -26,7 +28,34 @@ public class FrogInf implements  IFrog{
             return direction;
         }
 
-	/* Alternatif avec mouvement de tête
+    public void move(Direction key){
+            switch (key){
+                case right:
+                    if(position.absc+1 <= game.width) {
+                        this.position = new Case(position.absc + 1, position.ord);
+                    }
+                    // Verif si en dehors de l'ecran
+                    break;
+                case left:
+                    if(position.absc-1 >= 0) {
+                        this.position = new Case(position.absc - 1, position.ord);
+                    }
+                    break;
+                case up:
+                        this.score++;
+                        ;
+                        this.position = new Case(position.absc, position.ord + 1);
+                    break;
+                case down:
+                    if(position.ord-1 >= 0) {
+                        this.score--;
+                        this.position = new Case(position.absc, position.ord - 1);
+                    }
+                    break;
+            }
+        }
+
+        	/* Alternatif avec mouvement de tête
 	public void move(Direction key) {
 		if(key == direction){
 				switch (direction){
@@ -55,34 +84,5 @@ public class FrogInf implements  IFrog{
 		}
 		this.direction = key; // on voulait faire comme a l'ancienne avec une tete qui tourne.
 	}*/
-
-    public void move(Direction key){
-            switch (key){
-                case right:
-                    if(position.absc+1 <= game.width) {
-                        this.position = new Case(position.absc + 1, position.ord);
-                    }
-                    // Verif si en dehors de l'ecran
-                    break;
-                case left:
-                    if(position.absc-1 >= 0) {
-                        this.position = new Case(position.absc - 1, position.ord);
-                    }
-                    break;
-                case up:
-                        this.score++;
-                        ;
-                        this.position = new Case(position.absc, position.ord + 1);
-                        game.getEnvironment().add();
-
-                    break;
-                case down:
-                    if(position.ord-1 >= 0) {
-                        this.score--;
-                        this.position = new Case(position.absc, position.ord - 1);
-                    }
-                    break;
-            }
-        }
     }
 

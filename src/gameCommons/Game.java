@@ -3,9 +3,9 @@ package gameCommons;
 import java.awt.Color;
 import java.util.Random;
 
-import frog.Frog;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import util.Direction;
 
 public class Game {
 
@@ -29,7 +29,7 @@ public class Game {
 	}
 
 	private IFrog frog;
-	private IFroggerGraphics graphic;
+	public IFroggerGraphics graphic;
 
 	/**
 	 * 
@@ -125,6 +125,9 @@ public class Game {
 		graphic.clear();
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+		if(frog.getDirection().equals(Direction.right)){
+			graphic.endGameScreen("az");
+		}
 		//testLose();
 	}
 
