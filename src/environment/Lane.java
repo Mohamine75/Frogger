@@ -8,9 +8,7 @@ import gameCommons.Game;
 public class Lane {
 	private Game game;
 
-	public void setOrd(int ord) {
-		this.ord = ord;
-	}
+
 
 	public int getOrd() {
 		return ord;
@@ -23,6 +21,9 @@ public class Lane {
 	private double density;
 	private int compteur = 0;
 
+	public void setOrd(int ord) {
+		this.ord = ord;
+	}
 	public Lane(Game game, int ord) {
 		this.game = game;
 		this.ord = ord;

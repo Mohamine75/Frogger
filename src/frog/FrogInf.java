@@ -14,7 +14,7 @@ public class FrogInf implements  IFrog{
         private Integer scoreMax;
 
         public FrogInf(Game game){
-            this.position = new Case(game.width/2,2 );
+            this.position = new Case(game.width/2,1 );
             this.game = game;
             this.score = 0;
             this.scoreMax = 0;
@@ -73,23 +73,27 @@ public class FrogInf implements  IFrog{
                     }
                     break;
                 case up:
+                        game.getEnvironment().add();
                         this.score++;
                         if(score > scoreMax){
                             scoreMax = score;
                         }
-                        if(score<2){
-                            position= new  Case(position.absc,position.ord+1);
-                            game.getEnvironment().add();
-                        }else {
+                        if(score<3){
+                            position= new Case(position.absc,position.ord+1);
+                        }else{
                             //position =  new Case(position.absc,position.ord+1);
                             game.getEnvironment().decalageDown();
-                            game.getEnvironment().add();
                         }
+
                     break;
                 case down:
-                    if(position.ord-1 >= 0) {
+
+                    if(position.ord-1 >= 1) {
                         this.position = new Case(position.absc, position.ord - 1);
                         this.score--;
+                        if(score>=3){
+                            game.getEnvironment().decalageDown();
+                        }
                     }
                     break;
             }

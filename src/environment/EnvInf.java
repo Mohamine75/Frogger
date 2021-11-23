@@ -32,20 +32,31 @@ public class EnvInf implements  IEnvironment{
         this.lanes= new ArrayList<>();
         lanes.add(new Lane(game,0));
         lanes.add(new Lane(game,1));
-        for (int i = 3; i < game.height +5; i++) {
+        for (int i = 2; i < game.height +5; i++) {
             lanes.add(new Lane(game, i, game.randomGen.nextInt(10)+1,game.randomGen.nextBoolean() , 0.04));
         }
+        System.out.println(toString());
     }
 
     public void decalageDown(){
          erased.add(lanes.get(0));
          lanes.remove(0);
         for (Lane l :
-             lanes) {
+                lanes) {
             l.setOrd(l.getOrd()-1);
         }
          System.out.println(toString());
     }
+    public void decalageUp(){
+        lanes.add(erased.get(0));
+        ArrayList<Lane> tmp = new ArrayList<>();
+        erased.remove(0);
+        for (Lane l :
+                lanes) {
+            l.setOrd(l.getOrd()+1);
+         }
+        System.out.println(toString());
+        }
 
     public boolean isSafe(Case c){
         for(Lane l : lanes){
