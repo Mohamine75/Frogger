@@ -16,6 +16,15 @@ public class Lane {
 
 	private int ord;
 	private int speed;
+
+	public void setCars(ArrayList<Car> cars) {
+		this.cars = cars;
+	}
+
+	public ArrayList<Car> getCars() {
+		return cars;
+	}
+
 	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;

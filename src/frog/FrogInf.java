@@ -73,13 +73,12 @@ public class FrogInf implements  IFrog{
                 }
                 break;
             case up:
-                game.getEnvironment().add();
                 this.score++;
                 if (score > scoreMax) {
                     scoreMax = score;
                 }
                 //position =  new Case(position.absc,position.ord+1);
-                game.getEnvironment().decalageDown();
+                game.getEnvironment().setDown(true);
                 break;
 
         case down:

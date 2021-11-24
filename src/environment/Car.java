@@ -50,7 +50,12 @@ public class Car {
 	}
 	public void move(){
 		if(leftToRight) {
+			/*if(this.leftPosition.absc +length -1 > game.width){
+				leftPosition =  new Case(0, leftPosition.ord);
+				return;
+			}*/
 			this.leftPosition = new Case(leftPosition.absc +1,leftPosition.ord);
+			return;
 		}
 		else{this.leftPosition = new Case(leftPosition.absc - 1,leftPosition.ord);}
 	}
