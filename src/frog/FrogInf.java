@@ -55,7 +55,7 @@ public class FrogInf implements  IFrog{
                 break;
 
         case down:
-            if (score > 1) {
+            if (score >= 1) {
             game.getEnvironment().decalageUp();
                 }
             if(score>0){

@@ -14,7 +14,7 @@ public class Game {
 
 	// Caracteristique de la partie
 	public final int width;
-
+	private float timer = 0;
 
 	public  int height;
 	public final int minSpeedInTimerLoops;
@@ -92,7 +92,7 @@ public class Game {
 		// TODO
 		if(!environment.isSafe(frog.getPosition())){
 			graphic.endGameScreen("Perdu , score :" + frog.getScore()
-			+"\n Meilleur score: " +frog.getScoreMax());
+			+"\n Meilleur score: " +frog.getScoreMax() +  " " + timer);
 			return true;
 		}
 		return false;
@@ -125,10 +125,12 @@ public class Game {
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
 	 */
+
 	public void update() {
 		graphic.clear();
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+		timer+=0.1;
 		testLose();
 	}
 
