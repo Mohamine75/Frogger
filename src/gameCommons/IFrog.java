@@ -16,7 +16,7 @@ public interface IFrog {
 	 * @return
 	 */
 	public Direction getDirection();
-
+	public Integer getScoreMax();
 	public Integer getScore();
 	/**
 	 * D�place la grenouille dans la direction donn�e et teste la fin de partie

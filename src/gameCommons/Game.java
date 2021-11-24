@@ -91,7 +91,8 @@ public class Game {
 	public boolean testLose() {
 		// TODO
 		if(!environment.isSafe(frog.getPosition())){
-			graphic.endGameScreen("Perdu , score :" + frog.getScore());
+			graphic.endGameScreen("Perdu , score :" + frog.getScore()
+			+"\n Meilleur score: " +frog.getScoreMax());
 			return true;
 		}
 		return false;
@@ -128,7 +129,7 @@ public class Game {
 		graphic.clear();
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-		//testLose();
+		testLose();
 	}
 
 }
