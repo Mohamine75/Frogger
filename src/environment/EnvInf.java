@@ -9,29 +9,12 @@ import gameCommons.IEnvironment;
 import util.Direction;
 
 
-public class EnvInf implements  IEnvironment {
+public class EnvInf implements IEnvironment {
     private final Game game;
-
-    public void setDown(boolean down) {
-        this.down = down;
-    }
-
     private boolean down = false;
     ArrayList<Lane> erased = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        String res = "lanes : ";
-        for (Lane l :
-                lanes) {
-            res += l.getOrd();
-        }
-        return res;
-    }
-
     private ArrayList<Lane> lanes;
 
-    //TODO
     public EnvInf(Game game) {
         this.game = game;
         this.lanes = new ArrayList<>();
@@ -43,6 +26,25 @@ public class EnvInf implements  IEnvironment {
         System.out.println(toString());
     }
 
+    public void setDown(boolean down) {
+        this.down = down;
+    }
+
+
+    @Override
+    public String toString() {
+        String res = "lanes : ";
+        for (Lane l :
+                lanes) {
+            res += l.getOrd();
+        }
+        return res;
+    }
+
+
+    //TODO
+
+
     /*public void decalageDown(){
          erased.add(lanes.get(0));
          lanes.remove(0);
@@ -53,25 +55,41 @@ public class EnvInf implements  IEnvironment {
     }*/
 
     public void decalageDown() {
-            for (int i = 0; i < lanes.size() - 1; i++) {
-                ArrayList<Car> voitures = lanes.get(i+1).getCars();
-                lanes.set(i, lanes.get(i + 1));
-                lanes.get(i).setCars(voitures);
-                lanes.get(i).setOrd(i);
+        erased.add(lanes.get(0));
+        for (int i = 0; i < lanes.size() - 1; i++) {
+            ArrayList<Car> voitures = lanes.get(i + 1).getCars();
+            for (Car v:
+                 voitures) {
+                v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord-1));
             }
-            lanes.remove(lanes.size()-1);
-            System.out.println(toString());
+
+            lanes.set(i, lanes.get(i + 1));
+            lanes.get(i).setCars(voitures);
+            lanes.get(i).setOrd(i);
         }
+        lanes.remove(lanes.size() - 1);
+        add();
+        game.update();
+        System.out.println(toString());
+    }
 
     public void decalageUp() {
+        for (int i = 1; i < lanes.size() - 1; i++) {
+            ArrayList<Car> voitures = lanes.get(i  -1).getCars();
+            for (Car v:
+                    voitures) {
+                v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord+1));
+            }
 
-        erased.remove(0);
-        for (Lane l :
-                lanes) {
-            l.setOrd(l.getOrd() + 1);
+            lanes.set(i, lanes.get(i -1));
+            lanes.get(i).setCars(voitures);
+            lanes.get(i).setOrd(i);
         }
-        lanes.add(erased.get(0));
+        erased.remove(0);
+        add();
+        game.update();
         System.out.println(toString());
+
 
     }
 
@@ -87,7 +105,7 @@ public class EnvInf implements  IEnvironment {
     }
 
     public void add() {
-        lanes.add(new Lane(game, lanes.size()-1, game.randomGen.nextInt(10) + 1, game.randomGen.nextBoolean(), 0.1));
+        lanes.add(new Lane(game, lanes.size() - 1, game.randomGen.nextInt(10) + 1, game.randomGen.nextBoolean(), 0.1));
     }
 
     public Lane getLane(int ord) {
@@ -100,10 +118,10 @@ public class EnvInf implements  IEnvironment {
 
     public void update() {
         int compteur = 0;
-        if(down){
+       /* if(down){
             decalageDown();
             down = false;
-        }
+        }*/
         for (Lane l : lanes) {
             l.update();
         }
@@ -115,6 +133,6 @@ public class EnvInf implements  IEnvironment {
         if (game.getFrog().getScore()<compteur){
             decalageUp();
         }*/
-        }
-
     }
+
+}

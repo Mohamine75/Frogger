@@ -73,7 +73,6 @@ public class Lane {
 			for (Car c : cars) {
 				c.addToGraphics();
 			}
-
 		}
 
 	// TODO : ajout de methodes

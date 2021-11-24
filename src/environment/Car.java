@@ -36,8 +36,15 @@ public class Car {
 	}
 	//TODO : ajout de methodes
 
-	
-	
+
+	public Case getLeftPosition() {
+		return leftPosition;
+	}
+
+	public void setLeftPosition(Case leftPosition) {
+		this.leftPosition = leftPosition;
+	}
+
 	/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	public void addToGraphics() {
 		for (int i = 0; i < length; i++) {
