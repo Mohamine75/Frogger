@@ -11,12 +11,12 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListener {
-	private ArrayList<Element> elementsToDisplay;
-	private int pixelByCase = 16;
-	private int width;
-	private int height;
+	private final ArrayList<Element> elementsToDisplay;
+	private final int pixelByCase = 16;
+	private final int width;
+	private final int height;
 	private IFrog frog;
-	private JFrame frame;
+	private final JFrame frame;
 
 	public FroggerGraphic(int width, int height) {
 		this.width = width;

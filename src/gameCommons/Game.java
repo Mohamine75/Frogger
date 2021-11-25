@@ -11,28 +11,15 @@ import util.Direction;
 public class Game {
 
 	public final Random randomGen = new Random();
-
 	// Caracteristique de la partie
 	public final int width;
 	private float timer = 0;
-
 	public  int height;
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
-
-	public IEnvironment getEnvironment() {
-		return environment;
-	}
-
-	// Lien aux objets utilis�s
 	private IEnvironment environment;
-
-	public IFrog getFrog() {
-		return frog;
-	}
-
 	private IFrog frog;
-	private IFroggerGraphics graphic;
+	private final IFroggerGraphics graphic;
 
 	/**
 	 * 
@@ -56,6 +43,13 @@ public class Game {
 		this.defaultDensity = defaultDensity;
 	}
 
+	public IFrog getFrog() {
+		return frog;
+	}
+
+	public IEnvironment getEnvironment() {
+		return environment;
+	}
 	/**
 	 * Lie l'objet frog � la partie
 	 * 
@@ -82,12 +76,6 @@ public class Game {
 		return graphic;
 	}
 
-	/**
-	 * Teste si la partie est perdue et lance un �cran de fin appropri� si tel
-	 * est le cas
-	 * 
-	 * @return true si le partie est perdue
-	 */
 	public boolean testLose() {
 		// TODO
 		if(!environment.isSafe(frog.getPosition())){
@@ -98,27 +86,12 @@ public class Game {
 		return false;
 	}
 
-	/**
-	 * Teste si la partie est gagnee et lance un �cran de fin appropri� si tel
-	 * est le cas
-	 * 
-	 * @return true si la partie est gagn�e
-	 */
 	/*public boolean testWin() {
-		// TODO
 		if(environment.isWinningPosition(frog.getPosition())){
 			graphic.endGameScreen("Gagné !!");
 			return true;
 		}
 		return false;
-	}*/
-
-	/*public boolean testOffLimits() {
-		if(frog.getPosition().absc > this.width || frog.getPosition().absc < 0 || frog.getPosition().ord > this.height || frog.getPosition().ord < 0){
-			int a = 0;
-			return false;
-		}
-		return true;
 	}*/
 
 	/**

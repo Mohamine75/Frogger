@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Piege {
 
-    private Game game;
+    private final Game game;
     private Case position;
     private final Color color = Color.RED;
 
@@ -30,9 +30,7 @@ public class Piege {
     }
     public boolean covers(Case c){
        if(c.ord == position.ord){
-           if(c.absc == position.absc ){
-               return true;
-           }
+           return c.absc == position.absc;
        }
        return false;
     }

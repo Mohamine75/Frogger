@@ -13,15 +13,15 @@ public interface IEnvironment {
 	 *            la case � tester
 	 * @return vrai s'il n'y a pas danger
 	 */
-	public boolean isSafe(Case c);
+    boolean isSafe(Case c);
 
-	public void add();
-	public void decalageDown();
-	public void decalageUp();
-	public String toString();
-	public ArrayList<Lane> getLanes();
+	void add();
+	void decalageDown();
+	void decalageUp();
+	String toString();
+	ArrayList<Lane> getLanes();
 
-	public Lane getLane(int ord);
+	Lane getLane(int ord);
 	/**
 	 * Teste si la case est une case d'arrivee
 	 * 
@@ -33,6 +33,6 @@ public interface IEnvironment {
 	/**
 	 * Effectue une �tape d'actualisation de l'environnement
 	 */
-	public void update();
+    void update();
 
 }

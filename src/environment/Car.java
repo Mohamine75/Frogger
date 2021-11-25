@@ -10,13 +10,13 @@ import util.Case;
 public class Car {
 
 
-	private Game game;
+	private final Game game;
 
 
 
 	private Case leftPosition;
-	private boolean leftToRight;
-	private int length;
+	private final boolean leftToRight;
+	private final int length;
 	private final Color colorLtR = Color.BLACK;
 	private final Color colorRtL = Color.BLUE;
 

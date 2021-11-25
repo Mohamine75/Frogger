@@ -11,7 +11,7 @@ import util.Direction;
 
 public class EnvInf implements IEnvironment {
     private final Game game;
-    private ArrayList<Lane> lanes;
+    private final ArrayList<Lane> lanes;
 
     public EnvInf(Game game) {
         this.game = game;
@@ -21,10 +21,24 @@ public class EnvInf implements IEnvironment {
         for (int i = 2; i < game.height + 5; i++) {
             lanes.add(new Lane(game, i, game.randomGen.nextInt(5) + 1, game.randomGen.nextBoolean(), 0.01));
         }
-        System.out.println(toString());
+        System.out.println(this);
     }
 
+    public ArrayList<Lane> getLanes() {
+        return lanes;
+    }
 
+    public void add() {
+        lanes.add(new Lane(game, lanes.size(), game.randomGen.nextInt(10) + 1, game.randomGen.nextBoolean(), 0.1));
+    }
+
+    public Lane getLane(int ord) {
+        return lanes.get(ord);
+    }
+
+    public boolean isWinningPosition(Case c) {
+        return false;
+    }
 
     @Override
     public String toString() {
@@ -35,9 +49,6 @@ public class EnvInf implements IEnvironment {
         }
         return res;
     }
-
-
-    //TODO
 
 
     public void decalageDown(){
@@ -74,21 +85,7 @@ public class EnvInf implements IEnvironment {
         return true;
     }
 
-    public ArrayList<Lane> getLanes() {
-        return lanes;
-    }
 
-    public void add() {
-        lanes.add(new Lane(game, lanes.size(), game.randomGen.nextInt(10) + 1, game.randomGen.nextBoolean(), 0.1));
-    }
-
-    public Lane getLane(int ord) {
-        return lanes.get(ord);
-    }
-
-    public boolean isWinningPosition(Case c) {
-        return false;
-    }
 
     public void update() {
         for (Lane l : lanes) {
