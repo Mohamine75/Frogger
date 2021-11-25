@@ -49,7 +49,7 @@ public class Lane {
 		this.leftToRight = leftToRight;
 		this.density = density;
 		if (game.randomGen.nextInt(8) < 1 && pieges.isEmpty()) {
-			pieges.add(new Piege(game, new Case(3, ord)));
+			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width)-1, ord)));
 
 		}
 	}
@@ -78,13 +78,14 @@ public class Lane {
 			this.compteur = 0;
 		}
 		mayAddCar();
-		for (Car c : cars) {
-			c.addToGraphics();
-		}
 		for (Piege p :
 				pieges) {
 			p.addToGraphics();
 		}
+		for (Car c : cars) {
+			c.addToGraphics();
+		}
+
 	}
 
 	// TODO : ajout de methodes
