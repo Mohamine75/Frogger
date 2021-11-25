@@ -46,6 +46,10 @@ public class EnvInf implements IEnvironment {
             for(Car v: l.getCars()){
                 v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord-1));
             }
+            for(Piege p : l.getPieges()){
+                p.setPosition(new Case(p.getPosition().absc,p.getPosition().ord-1));
+                System.out.println(p.getPosition());
+            }
         }
         add();
     }
@@ -57,6 +61,9 @@ public class EnvInf implements IEnvironment {
             l.setOrd(l.getOrd()+1);
             for(Car v: l.getCars()){
                 v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord+1));
+            }
+            for(Piege p : l.getPieges()){
+                p.setPosition(new Case(p.getPosition().absc,p.getPosition().ord+1));
             }
         }
     }

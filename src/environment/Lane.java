@@ -8,12 +8,11 @@ import gameCommons.Game;
 public class Lane {
 	private Game game;
 
-
-
 	public int getOrd() {
 		return ord;
 	}
 
+	private ArrayList<Piege> pieges = new ArrayList<>();
 	private int ord;
 	private int speed;
 
@@ -33,6 +32,7 @@ public class Lane {
 	public void setOrd(int ord) {
 		this.ord = ord;
 	}
+
 	public Lane(Game game, int ord) {
 		this.game = game;
 		this.ord = ord;
@@ -48,37 +48,49 @@ public class Lane {
 		this.speed = speed;
 		this.leftToRight = leftToRight;
 		this.density = density;
+		if (game.randomGen.nextInt(8) < 1 && pieges.isEmpty()) {
+			pieges.add(new Piege(game, new Case(3, ord)));
+
+		}
 	}
 
-		// TODO
+	// TODO
 
-		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
-		// d'horloge" �gal � leur vitesse
-		// Notez que cette m�thode est appel�e � chaque tic d'horloge
+	public ArrayList<Piege> getPieges() {
+		return pieges;
+	}
 
-		// Les voitures doivent etre ajoutes a l interface graphique meme quand
-		// elle ne bougent pas
+	// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
+	// d'horloge" �gal � leur vitesse
+	// Notez que cette m�thode est appel�e � chaque tic d'horloge
 
-		// A chaque tic d'horloge, une voiture peut �tre ajout�e
+	// Les voitures doivent etre ajoutes a l interface graphique meme quand
+	// elle ne bougent pas
+
+	// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
 	public void update() {
 		compteur++;
-			if (compteur  == speed) {
-				for (Car c : cars) {
-					c.move();
-				}
-				this.compteur =0;
-			}
-			mayAddCar();
+		if (compteur == speed) {
 			for (Car c : cars) {
-				c.addToGraphics();
+				c.move();
 			}
+			this.compteur = 0;
 		}
+		mayAddCar();
+		for (Car c : cars) {
+			c.addToGraphics();
+		}
+		for (Piege p :
+				pieges) {
+			p.addToGraphics();
+		}
+	}
 
 	// TODO : ajout de methodes
 
 	/*
-	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase() 
+	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase()
 	 */
 
 	/**
@@ -107,13 +119,19 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public boolean isSafe(Case c){
-		for(Car v : cars){
-			if(v.covers(c)){
+	public boolean isSafe(Case c) {
+		for (Car v : cars) {
+			if (v.covers(c)) {
 				return false;
+			}
+		}
+		if (!pieges.isEmpty()) {
+			for (Piege p : pieges) {
+				if (p.covers(c)){
+					return false;
+				}
 			}
 		}
 		return true;
 	}
-
 }
