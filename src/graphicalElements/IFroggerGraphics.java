@@ -1,5 +1,5 @@
 package graphicalElements;
-
+import util.Case;
 import gameCommons.IFrog;
 
 public interface IFroggerGraphics {
@@ -19,7 +19,8 @@ public interface IFroggerGraphics {
      * Actualise l'affichage
      */
     void repaint();
-    
+
+
     /**
      * Lie la grenouille � l'environneemnt graphique
      * @param frog

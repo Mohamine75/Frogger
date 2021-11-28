@@ -68,6 +68,10 @@ public class Game {
 		this.environment = environment;
 	}
 
+	public float getTimer() {
+		return timer;
+	}
+
 	/**
 	 * 
 	 * @return l'interface graphique

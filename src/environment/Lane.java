@@ -1,20 +1,20 @@
 package environment;
 
-import java.util.ArrayList;
-
-import util.Case;
+import Pieges.*;
 import gameCommons.Game;
+import util.Case;
+
+import java.util.ArrayList;
 
 public class Lane {
 	private final Game game;
-	private final ArrayList<Piege> pieges = new ArrayList<>();
 	private int ord;
 	private final int speed;
 	private ArrayList<Car> cars = new ArrayList<>();
 	private final boolean leftToRight;
 	private final double density;
 	private int compteur = 0;
-
+	private ArrayList<IPiege> pieges = new ArrayList<>();
 
 
 	public Lane(Game game, int ord) {
@@ -32,9 +32,18 @@ public class Lane {
 		this.speed = speed;
 		this.leftToRight = leftToRight;
 		this.density = density;
-		if (game.randomGen.nextInt(8) < 1 && pieges.isEmpty()) {
-			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width)-1, ord)));
-
+		if (game.randomGen.nextInt(10) == 0) {
+			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+			return;
+		}
+		if (game.randomGen.nextInt(10) == 1 && pieges.isEmpty()) {
+			pieges.add(new Tremplin(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+		}
+		if (game.randomGen.nextInt(20) == 2) {
+			pieges.add(new Bonus(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+		}
+		if (game.randomGen.nextInt(15) == 3) {
+			pieges.add(new Tunnel(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
 	}
 
@@ -46,7 +55,11 @@ public class Lane {
 		this.ord = ord;
 	}
 
-	public ArrayList<Piege> getPieges() {
+	public ArrayList<IPiege> getPieges() {
+		return pieges;
+	}
+
+	public ArrayList<IPiege> getTremplins() {
 		return pieges;
 	}
 
@@ -54,7 +67,15 @@ public class Lane {
 		return cars;
 	}
 
+	public boolean forbidden(Case c) {
+		for (IPiege p : pieges) {
+			if (p.forbidden(c)) {
+				return true;
 
+			}
+		}
+		return false;
+	}
 	public void update() {
 		compteur++;
 		if (compteur == speed) {
@@ -64,7 +85,7 @@ public class Lane {
 			this.compteur = 0;
 		}
 		mayAddCar();
-		for (Piege p : pieges) {
+		for (IPiege p : pieges) {
 			p.addToGraphics();
 		}
 		for (Car c : cars) {
@@ -101,12 +122,14 @@ public class Lane {
 			}
 		}
 		if (!pieges.isEmpty()) {
-			for (Piege p : pieges) {
-				if (p.covers(c)){
-					return false;
+			for (IPiege p : pieges) {
+				if (p.covers(c)) {
+					pieges.remove(p);
+					return (p.action());
 				}
 			}
 		}
+
 		return true;
 	}
 }

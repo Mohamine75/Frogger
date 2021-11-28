@@ -17,11 +17,14 @@ public interface IFrog {
 	 */
     Direction getDirection();
 	Integer getScoreMax();
+	void setPosition(Case position);
 	Integer getScore();
 	/**
 	 * D�place la grenouille dans la direction donn�e et teste la fin de partie
 	 * @param key
 	 */
     void move(Direction key);
+
+	public void add(int bonus);
 
 }

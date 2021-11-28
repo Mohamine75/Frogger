@@ -1,12 +1,12 @@
 package environment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import Pieges.Piege;
+import Pieges.*;
 import util.Case;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
-import util.Direction;
 
 
 public class EnvInf implements IEnvironment {
@@ -19,7 +19,7 @@ public class EnvInf implements IEnvironment {
         lanes.add(new Lane(game, 0));
         lanes.add(new Lane(game, 1));
         for (int i = 2; i < game.height + 5; i++) {
-            lanes.add(new Lane(game, i, game.randomGen.nextInt(5) + 1, game.randomGen.nextBoolean(), 0.01));
+            lanes.add(new Lane(game, i, game.randomGen.nextInt(5 )+1, game.randomGen.nextBoolean(), 0.01));
         }
         System.out.println(this);
     }
@@ -29,11 +29,17 @@ public class EnvInf implements IEnvironment {
     }
 
     public void add() {
-        lanes.add(new Lane(game, lanes.size(), game.randomGen.nextInt(10) + 1, game.randomGen.nextBoolean(), 0.1));
+        lanes.add(new Lane(game, lanes.get(lanes.size()-1).getOrd()+1,
+                game.randomGen.nextInt(10 )+1, game.randomGen.nextBoolean(), 0.01));
     }
 
     public Lane getLane(int ord) {
-        return lanes.get(ord);
+       for(Lane l : lanes){
+           if (l.getOrd()== ord){
+               return l;
+           }
+       }
+       return null;
     }
 
     public boolean isWinningPosition(Case c) {
@@ -52,14 +58,16 @@ public class EnvInf implements IEnvironment {
 
 
     public void decalageDown(){
+
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()-1);
-            for(Car v: l.getCars()){
-                v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord-1));
+            for (Car v : l.getCars()) {
+                v.setLeftPosition(new Case(v.getLeftPosition().absc, v.getLeftPosition().ord - 1));
             }
-            for(Piege p : l.getPieges()){
-                p.setPosition(new Case(p.getPosition().absc,p.getPosition().ord-1));
-                System.out.println(p.getPosition());
+            if(!l.getPieges().isEmpty()) {
+                for (IPiege p : l.getPieges()) {
+                    p.setPosition(new Case(p.getPosition().absc, p.getPosition().ord - 1));
+                }
             }
         }
         add();
@@ -68,19 +76,21 @@ public class EnvInf implements IEnvironment {
 
 
     public void decalageUp() {
+
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()+1);
             for(Car v: l.getCars()){
                 v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord+1));
             }
-            for(Piege p : l.getPieges()){
+            for(IPiege p : l.getPieges()){
                 p.setPosition(new Case(p.getPosition().absc,p.getPosition().ord+1));
             }
         }
     }
+
     public boolean isSafe(Case c) {
-        for (Lane l : lanes) {
-            if (!l.isSafe(c)) return false;
+        for (int i = 0; i < lanes.size(); i++) {
+            if (!lanes.get(i).isSafe(c)) return false;
         }
         return true;
     }
