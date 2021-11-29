@@ -1,4 +1,4 @@
-/*package frog;
+package frog;
 
 import gameCommons.Game;
 import gameCommons.IFrog;
@@ -28,7 +28,22 @@ public class Frog implements IFrog {
 		return direction;
 	}
 
-	@Override
+    @Override
+    public Integer getScoreMax() {
+        return null;
+    }
+
+    @Override
+    public void setPosition(Case position) {
+
+    }
+
+    @Override
+    public Integer getScore() {
+        return null;
+    }
+
+    @Override
 
 	public void move(Direction key){
 		switch (key){
@@ -55,4 +70,9 @@ public class Frog implements IFrog {
 				break;
 		}
 	}
-}*/
+
+    @Override
+    public void add(int bonus) {
+
+    }
+}

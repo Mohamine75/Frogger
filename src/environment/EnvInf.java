@@ -1,4 +1,4 @@
-package environment;
+/*package environment;
 
 import java.util.ArrayList;
 
@@ -105,3 +105,4 @@ public class EnvInf implements IEnvironment {
     }
 
 }
+*/
