@@ -90,13 +90,13 @@ public class Game {
 		return false;
 	}
 
-	/*public boolean testWin() {
+	public boolean testWin() {
 		if(environment.isWinningPosition(frog.getPosition())){
 			graphic.endGameScreen("Gagné !!");
 			return true;
 		}
 		return false;
-	}*/
+	}
 
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
@@ -109,6 +109,7 @@ public class Game {
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		timer+=0.1;
 		testLose();
+		testWin();
 	}
 
 }

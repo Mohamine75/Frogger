@@ -7,7 +7,7 @@ import util.Case;
 import java.awt.*;
 
 public class Tunnel implements IPiege {
-
+    private boolean safe = true;
     private final Game game;
     private Case position;
     private final Color color = Color.yellow;
