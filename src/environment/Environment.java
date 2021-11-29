@@ -1,10 +1,10 @@
 package environment;
 
-import java.util.ArrayList;
-
-import util.Case;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
+import util.Case;
+
+import java.util.ArrayList;
 
 public class Environment implements IEnvironment {
      private final Game game;
@@ -16,7 +16,7 @@ public class Environment implements IEnvironment {
         lanes.add(new Lane(game,0));
 
         for (int i = 1; i < game.height -1; i++) {
-            if(i < (game.height-1)/2)
+            if(i < ((game.height-1)/2 ))
                 lanes.add(new Lane(game, i, game.randomGen.nextInt(10)+1,game.randomGen.nextBoolean() , 0.01, true));
             else {
                 lanes.add(new Lane(game, i, game.randomGen.nextInt(10)+1,game.randomGen.nextBoolean() , 0.01, false));
@@ -66,6 +66,11 @@ public class Environment implements IEnvironment {
 
     @Override
     public Lane getLane(int ord) {
+        for (Lane l: lanes) {
+            if( l.getOrd() == ord){
+                return l;
+            }
+        }
         return null;
     }
 

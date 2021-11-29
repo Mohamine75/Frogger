@@ -51,7 +51,7 @@ public class Lane {
 		if (game.randomGen.nextInt(20) == 2) {
 			pieges.add(new Bonus(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
-		if (game.randomGen.nextInt(15) == 3) {
+		if (game.randomGen.nextInt(15) == 3 && isRoad) {
 			pieges.add(new Tunnel(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
 	}
@@ -84,11 +84,16 @@ public class Lane {
 		paintWindow();
 		//mayAddCar();
 		mayAddObstacle();
+		for (IPiege p : pieges) {
+			p.addToGraphics();
+		}
 		for (IObstacle obs : obstacles) {
 			obs.addToGraphics();
 		}
 		for (IPiege p : pieges) {
-			p.addToGraphics();
+			if( p instanceof Tunnel ) {
+				p.addToGraphics();
+			}
 		}
 	}
 
@@ -146,8 +151,11 @@ public class Lane {
 			if (obs.covers(c) && isRoad ) {
 				return false;
 			}
-			if(obs.covers(c) && !isRoad) {return true;}
-			/*if(!obs.covers(c) && !isRoad) {
+			/*if(obs.covers(c) && !isRoad) {
+				return true;
+			}
+			if(!obs.covers(c) && !isRoad) {
+				System.out.println("Water");
 				return false;
 			}*/
 		}

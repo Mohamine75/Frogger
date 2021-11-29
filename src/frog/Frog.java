@@ -12,6 +12,7 @@ public class Frog implements IFrog {
 	private Game game;
 	private IFrog frog;
 	private int score;
+	private Integer scoreMax = 0;
 
 
 	public Frog(Game game){
@@ -32,7 +33,7 @@ public class Frog implements IFrog {
 
     @Override
     public Integer getScoreMax() {
-        return null;
+        return scoreMax;
     }
 
 
@@ -42,7 +43,7 @@ public class Frog implements IFrog {
 
 	@Override
     public void setPosition(Case position) {
-
+		this.position = position;
     }
 
     @Override
@@ -53,19 +54,19 @@ public class Frog implements IFrog {
     @Override
 
 	public void move(Direction key){
-		switch (key){
+		switch (key) {
 			case right:
 				this.direction = Direction.right;
-				if(!(new Case(position.absc+1,position.ord).isForbidden)){
-					if(position.absc+1 <= game.width) {
-					this.position = new Case(position.absc + 1, position.ord);
+				if (!game.getEnvironment().getLane(position.ord).forbidden(new Case(position.absc + 1, position.ord))) {
+					if (position.absc + 1 <= game.width) {
+						this.position = new Case(position.absc + 1, position.ord);
 					}
 				}
 				// Verif si en dehors de l'ecran
 				break;
 			case left:
 				this.direction = Direction.left;
-				if(!(new Case(position.absc-1,position.ord).isForbidden)){
+				if(!game.getEnvironment().getLane(position.ord).forbidden(new Case(position.absc-1, position.ord))){
 					if(position.absc-1 >= 0) {
 						this.position = new Case(position.absc - 1, position.ord);
 					}
@@ -73,23 +74,25 @@ public class Frog implements IFrog {
 				break;
 			case up:
 				this.direction = Direction.up;
-				if(!(new Case(position.absc,position.ord+1).isForbidden)){
-					score ++;
-					if(position.ord+1 <= game.height) {
-						this.position = new Case(position.absc, position.ord + 1);
+				if(!game.getEnvironment().getLane(position.ord+1).forbidden(new Case(position.absc, position.ord+1))) {
+						score++;
+						if(scoreMax< score){ scoreMax = score;}
+						if (position.ord + 1 <= game.height) {
+							this.position = new Case(position.absc, position.ord + 1);
+						}
 					}
-				}
 				break;
 			case down:
-				if(!(new Case(position.absc,position.ord-1).isForbidden)){
-					if(score >0){
-						score --;
-					}
-					this.direction = Direction.down;
-					if(position.ord-1 >= 0) {
+				if(!game.getEnvironment().getLane(position.ord-1).forbidden(new Case(position.absc, position.ord - 1))) {
+					if (position.ord - 1 >= 0) {
 						this.position = new Case(position.absc, position.ord - 1);
 					}
+					if (score > 0) {
+						score--;
+					}
+					this.direction = Direction.down;
 				}
+
 				break;
 		}
 	}

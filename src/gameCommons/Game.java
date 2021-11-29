@@ -1,12 +1,12 @@
 package gameCommons;
 
-import java.awt.Color;
+import graphicalElements.Element;
+import graphicalElements.IFroggerGraphics;
+
+import java.awt.*;
 import java.util.Random;
 
 //import frog.Frog;
-import graphicalElements.Element;
-import graphicalElements.IFroggerGraphics;
-import util.Direction;
 
 public class Game {
 
@@ -109,7 +109,7 @@ public class Game {
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		timer+=0.1;
 		testLose();
-		testWin();
+		//testWin();
 	}
 
 }

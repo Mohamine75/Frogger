@@ -10,13 +10,21 @@ public class Bonus implements IPiege{
 
     private final Game game;
     private Case position;
+    private int valeur;
     private final Color color =  Color.MAGENTA;
 
 
     public Bonus(Game game, Case position) {
         this.game = game;
         this.position = position;
+        this.valeur = 3;
     }
+    public Bonus(Game game, Case position,int valeur) {
+        this.game = game;
+        this.position = position;
+        this.valeur = valeur;
+    }
+
 
     public Case getPosition() {
         return position;
@@ -32,7 +40,7 @@ public class Bonus implements IPiege{
     }
 
     public boolean action(){
-        game.getFrog().setScore(5);
+        game.getFrog().setScore(valeur);
         return true;
 
     }
