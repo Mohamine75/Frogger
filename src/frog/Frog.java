@@ -56,31 +56,39 @@ public class Frog implements IFrog {
 		switch (key){
 			case right:
 				this.direction = Direction.right;
-				if(position.absc+1 <= game.width) {
+				if(!(new Case(position.absc+1,position.ord).isForbidden)){
+					if(position.absc+1 <= game.width) {
 					this.position = new Case(position.absc + 1, position.ord);
+					}
 				}
 				// Verif si en dehors de l'ecran
 				break;
 			case left:
 				this.direction = Direction.left;
-				if(position.absc-1 >= 0) {
-					this.position = new Case(position.absc - 1, position.ord);
+				if(!(new Case(position.absc-1,position.ord).isForbidden)){
+					if(position.absc-1 >= 0) {
+						this.position = new Case(position.absc - 1, position.ord);
+					}
 				}
 				break;
 			case up:
-				score ++;
 				this.direction = Direction.up;
-				if(position.ord+1 <= game.height) {
-					this.position = new Case(position.absc, position.ord + 1);
+				if(!(new Case(position.absc,position.ord+1).isForbidden)){
+					score ++;
+					if(position.ord+1 <= game.height) {
+						this.position = new Case(position.absc, position.ord + 1);
+					}
 				}
 				break;
 			case down:
-				if(score >0){
-					score --;
-				}
-				this.direction = Direction.down;
-				if(position.ord-1 >= 0) {
-					this.position = new Case(position.absc, position.ord - 1);
+				if(!(new Case(position.absc,position.ord-1).isForbidden)){
+					if(score >0){
+						score --;
+					}
+					this.direction = Direction.down;
+					if(position.ord-1 >= 0) {
+						this.position = new Case(position.absc, position.ord - 1);
+					}
 				}
 				break;
 		}
