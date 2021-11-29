@@ -84,7 +84,7 @@ public class FrogInf implements  IFrog {
                 break;
         }
     }
-    public void add(int bonus){
+    public void setScore(int bonus){
         this.score += bonus;
     }
 }

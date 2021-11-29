@@ -29,6 +29,7 @@ public class Lane {
 		this.leftToRight = true;
 		//this.cars = new ArrayList<>();
 		this.speed = 0;
+		this.isRoad= true;
 	}
 
 	public Lane(Game game, int ord, int speed, boolean leftToRight, double density, boolean isRoad) {
@@ -133,18 +134,22 @@ public class Lane {
 	}
 
 	public boolean isSafe(Case c) {
-		for (IObstacle obs : obstacles) {
-			if (obs.covers(c)) {
-				return false;
-			}
-		}
 		if (!pieges.isEmpty()) {
 			for (IPiege p : pieges) {
 				if (p.covers(c)) {
-					//pieges.remove(p);
+					pieges.remove(p);
 					return (p.action());
 				}
 			}
+		}
+		for (IObstacle obs : obstacles ) {
+			if (obs.covers(c) && isRoad ) {
+				return false;
+			}
+			if(obs.covers(c) && !isRoad) {return true;}
+			/*if(!obs.covers(c) && !isRoad) {
+				return false;
+			}*/
 		}
 		return true;
 	}

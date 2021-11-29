@@ -8,14 +8,16 @@ import util.Direction;
 public class Frog implements IFrog {
 
 	private Case position;
-	private Direction direction;
+	private Direction direction = Direction.up;
 	private Game game;
 	private IFrog frog;
+	private int score;
 
 
 	public Frog(Game game){
 		this.position = new Case(game.width/2,0 );
 		this.game = game;
+		this.score = 0;
 	}
 
 	@Override
@@ -33,14 +35,19 @@ public class Frog implements IFrog {
         return null;
     }
 
-    @Override
+
+	public void setScore(int score) {
+		this.score += score;
+	}
+
+	@Override
     public void setPosition(Case position) {
 
     }
 
     @Override
     public Integer getScore() {
-        return null;
+        return score;
     }
 
     @Override
@@ -48,22 +55,30 @@ public class Frog implements IFrog {
 	public void move(Direction key){
 		switch (key){
 			case right:
+				this.direction = Direction.right;
 				if(position.absc+1 <= game.width) {
 					this.position = new Case(position.absc + 1, position.ord);
 				}
 				// Verif si en dehors de l'ecran
 				break;
 			case left:
+				this.direction = Direction.left;
 				if(position.absc-1 >= 0) {
 					this.position = new Case(position.absc - 1, position.ord);
 				}
 				break;
 			case up:
+				score ++;
+				this.direction = Direction.up;
 				if(position.ord+1 <= game.height) {
 					this.position = new Case(position.absc, position.ord + 1);
 				}
 				break;
 			case down:
+				if(score >0){
+					score --;
+				}
+				this.direction = Direction.down;
 				if(position.ord-1 >= 0) {
 					this.position = new Case(position.absc, position.ord - 1);
 				}
@@ -71,8 +86,5 @@ public class Frog implements IFrog {
 		}
 	}
 
-    @Override
-    public void add(int bonus) {
 
-    }
 }

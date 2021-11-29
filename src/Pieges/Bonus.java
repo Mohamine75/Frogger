@@ -32,7 +32,7 @@ public class Bonus implements IPiege{
     }
 
     public boolean action(){
-        game.getFrog().add(5);
+        game.getFrog().setScore(5);
         return true;
 
     }
