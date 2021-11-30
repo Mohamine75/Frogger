@@ -1,4 +1,4 @@
-package environment;
+/*package environment;
 
 import gameCommons.Game;
 import gameCommons.IEnvironment;
@@ -79,4 +79,4 @@ public class Environment implements IEnvironment {
             lanes.get(i).update();
         }
     }
-}
+}*/

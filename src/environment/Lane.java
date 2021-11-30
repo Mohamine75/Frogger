@@ -39,8 +39,27 @@ public class Lane {
 		this.leftToRight = leftToRight;
 		this.density = density;
 		this.isRoad = isRoad;
-
-
+		if (game.randomGen.nextInt(10) == 0) {
+			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+			return;
+		}
+		if (game.randomGen.nextInt(10) == 1 && pieges.isEmpty()) {
+			pieges.add(new Tremplin(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+		}
+		if (game.randomGen.nextInt(20) == 2) {
+			pieges.add(new Bonus(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+		}
+		if (game.randomGen.nextInt(15) == 3 && isRoad) {
+			pieges.add(new Tunnel(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+		}
+	}
+	public Lane(Game game, int ord, int speed, boolean leftToRight, double density) {
+		this.game = game;
+		this.ord = ord;
+		this.speed = speed;
+		this.leftToRight = leftToRight;
+		this.density = density;
+		this.isRoad = game.randomGen.nextInt(10) != 1;
 		if (game.randomGen.nextInt(10) == 0) {
 			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 			return;
@@ -71,6 +90,14 @@ public class Lane {
 			}
 		}
 		return false;
+	}
+
+	public ArrayList<IObstacle> getObstacles() {
+		return obstacles;
+	}
+
+	public ArrayList<IPiege> getPieges() {
+		return pieges;
 	}
 
 	public void update() {
@@ -148,7 +175,7 @@ public class Lane {
 			}
 		}
 		for (IObstacle obs : obstacles ) {
-			if (obs.covers(c) && isRoad ) {
+			if (obs.covers(c) && isRoad) {
 				return false;
 			}
 			/*if(obs.covers(c) && !isRoad) {
@@ -165,10 +192,9 @@ public class Lane {
 	public void paintWindow() {
 		Color color = Color.blue;
 		for (int i = 0; i < game.width; i++) {
-			if ((game.height - 1) / 2 < ord)
+			if (!isRoad)
 				game.getGraphic().add(new Element(i, ord, color));
-
-			else if ((game.height-1) /2 > ord){
+			else{
 				game.getGraphic().add(new Element(i, ord, Color.BLACK));
 			}
 		}

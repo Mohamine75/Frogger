@@ -1,10 +1,10 @@
 package environment;
 
-import java.awt.Color;
-
-import util.Case;
 import gameCommons.Game;
 import graphicalElements.Element;
+import util.Case;
+
+import java.awt.*;
 
 public class Car implements IObstacle{
 
@@ -35,6 +35,14 @@ public class Car implements IObstacle{
 			game.getGraphic().add(new Element(leftPosition.absc + i, leftPosition.ord, color));
 		}
 	}
+	public void setLeftPosition(Case c){
+		this.leftPosition = c;
+	}
+
+	@Override
+	public Case getLeftPosition() {
+		return leftPosition;
+	}
 
 	public void move(){
 		if(leftToRight) {
@@ -43,9 +51,10 @@ public class Car implements IObstacle{
 				return;
 			}*/
 			this.leftPosition = new Case(leftPosition.absc +1,leftPosition.ord);
-			return;
 		}
-		else{this.leftPosition = new Case(leftPosition.absc - 1,leftPosition.ord);}
+		else{
+			this.leftPosition = new Case(leftPosition.absc - 1,leftPosition.ord);
+		}
 	}
 
 	public boolean covers(Case c){

@@ -1,12 +1,11 @@
-/*package environment;
+package environment;
 
-import java.util.ArrayList;
-
-import Pieges.Piege;
-import Pieges.*;
-import util.Case;
+import Pieges.IPiege;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
+import util.Case;
+
+import java.util.ArrayList;
 
 
 public class EnvInf implements IEnvironment {
@@ -58,10 +57,9 @@ public class EnvInf implements IEnvironment {
 
 
     public void decalageDown(){
-
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()-1);
-            for (Car v : l.getCars()) {
+            for (IObstacle v: l.getObstacles()) {
                 v.setLeftPosition(new Case(v.getLeftPosition().absc, v.getLeftPosition().ord - 1));
             }
             if(!l.getPieges().isEmpty()) {
@@ -79,7 +77,7 @@ public class EnvInf implements IEnvironment {
 
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()+1);
-            for(Car v: l.getCars()){
+            for(IObstacle v: l.getObstacles()){
                 v.setLeftPosition(new Case(v.getLeftPosition().absc,v.getLeftPosition().ord+1));
             }
             for(IPiege p : l.getPieges()){
@@ -98,11 +96,9 @@ public class EnvInf implements IEnvironment {
 
 
     public void update() {
-        for (Lane l : lanes) {
-            l.update();
+        for (int i = 0; i < lanes.size(); i++) {
+            lanes.get(i).update();
         }
 
     }
-
 }
-*/

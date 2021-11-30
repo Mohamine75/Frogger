@@ -1,9 +1,8 @@
 package gameCommons;
 
 import Music.PlayMusic;
-//import environment.EnvInf;
-import environment.Environment;
-import frog.Frog;
+import environment.EnvInf;
+//import frog.Frog;
 import frog.FrogInf;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
@@ -35,11 +34,11 @@ public class Main {
 		//Cr�ation de la partie
 		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
 		//Cr�ation et liason de la grenouille
-		IFrog frog = new Frog(game);
+		IFrog frog = new FrogInf(game);
 		game.setFrog(frog);
 		graphic.setFrog(frog);
 		//Cr�ation et liaison de l'environnement
-		IEnvironment env = new Environment(game);
+		IEnvironment env = new EnvInf(game);
 		game.setEnvironment(env);
 		PlayMusic p = new PlayMusic();
 		//Boucle principale : l'environnement s'acturalise tous les tempo milisecondes
@@ -57,6 +56,10 @@ public class Main {
 		Clip clip3 = AudioSystem.getClip();
 		clip3.open(audioStream3);
 		int compteur = 1;
+		for (int i = 0; i <10 ; i++) {
+			System.out.println(i);
+			System.out.println("\b");
+		}
 		Timer timer = new Timer(tempo, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

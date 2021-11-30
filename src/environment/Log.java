@@ -28,6 +28,15 @@ public class Log implements IObstacle{
         this.leftPosition = new Case(leftPosition.absc-1, leftPosition.ord);
     }
 
+    public void setLeftPosition(Case c){
+        this.leftPosition = c;
+    }
+
+    @Override
+    public Case getLeftPosition() {
+        return leftPosition;
+    }
+
     public boolean covers(Case c){
         if(c.ord == leftPosition.ord){
             for(int i = 0; i < length; i++){

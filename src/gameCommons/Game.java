@@ -109,7 +109,7 @@ public class Game {
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
 		timer+=0.1;
 		testLose();
-		//testWin();
+		testWin();
 	}
 
 }
