@@ -67,4 +67,7 @@ public class Car implements IObstacle{
 			}
 		return false;
 	}
+	public boolean action2(){
+		return false;
+	}
 }

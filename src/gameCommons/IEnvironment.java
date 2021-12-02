@@ -31,5 +31,6 @@ public interface IEnvironment {
 	 * Effectue une �tape d'actualisation de l'environnement
 	 */
     void update();
+	boolean isSafe2(Case c);
 
 }

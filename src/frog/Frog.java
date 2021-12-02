@@ -1,4 +1,4 @@
-/*package frog;
+package frog;
 
 
 import gameCommons.Game;
@@ -60,7 +60,7 @@ public class Frog implements IFrog {
 			case right:
 				this.direction = Direction.right;
 				if (!game.getEnvironment().getLane(position.ord).forbidden(new Case(position.absc + 1, position.ord))) {
-					if (position.absc + 1 <= game.width) {
+					if (position.absc + 1 < game.width) {
 						this.position = new Case(position.absc + 1, position.ord);
 					}
 				}
@@ -101,4 +101,3 @@ public class Frog implements IFrog {
 
 
 }
-*/

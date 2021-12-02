@@ -47,6 +47,10 @@ public class Game {
 		return frog;
 	}
 
+	public IFrog getFrogTwo() {
+		return frogTwo;
+	}
+
 	public IEnvironment getEnvironment() {
 		return environment;
 	}
@@ -87,7 +91,7 @@ public class Game {
 		return false;
 	}
 	public void testLoseTwoPlayers() {
-		if(!environment.isSafe(frogTwo.getPosition())){
+		if(!environment.isSafe2(frogTwo.getPosition())){
 			graphic.endGameScreen("Le joueur 1 a gagné !");
 		}
 		else if(!environment.isSafe(frog.getPosition())){
@@ -118,14 +122,14 @@ public class Game {
 	public void update() {
 		graphic.clear();
 		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Images.frogImage2));
-		//this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage2));
+		this.graphic.add(new Element(frog.getPosition(), Images.frogImage));
+		this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage2));
 		timer+=0.1;
 
-		//testLoseTwoPlayers();
-		//testWinTwoPlayers();
+		testLoseTwoPlayers();
+		testWinTwoPlayers();
 		testLose();
-		//testWin();
+		testWin();
 	}
 
 }

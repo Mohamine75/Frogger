@@ -10,4 +10,5 @@ public interface IObstacle {
     void setLeftPosition(Case c);
     Case getLeftPosition();
     boolean covers(Case c);
+    boolean action2();
 }

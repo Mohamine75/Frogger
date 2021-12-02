@@ -1,7 +1,7 @@
 package gameCommons;
 
-import environment.EnvInf;
-import frog.FrogInf;
+import environment.Environment;
+import frog.Frog;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 
@@ -33,16 +33,16 @@ public class Main {
 		//Cr�ation de la partie
 		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
 		//Cr�ation et liason de la grenouille
-		IFrog frog = new FrogInf(game);
+		IFrog frog = new Frog(game);
 
 		game.setFrog(frog);
 		graphic.setFrog(frog);
 
-		//IFrog frog1 = new Frog(game);
-		//game.setFrogTwo(frog1);
-		//graphic.setFrogTwo(frog1);
+		IFrog frog1 = new Frog(game);
+		game.setFrogTwo(frog1);
+		graphic.setFrogTwo(frog1);
 		//Cr�ation et liaison de l'environnement
-		IEnvironment env = new EnvInf(game);
+		IEnvironment env = new Environment(game);
 		game.setEnvironment(env);
 		//Boucle principale : l'environnement s'acturalise tous les tempo milisecondes
 		File file = new File("src/Music/Doom.wav");

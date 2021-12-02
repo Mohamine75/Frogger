@@ -133,7 +133,7 @@ public class Lane {
 		if (isSafeAdd(getFirstCase()) && isSafeAdd(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
 				if (!isRoad) {
-					obstacles.add(new Log(game, getBeforeFirstCase(),leftToRight));
+					obstacles.add(new Log(game, getFirstCase(),leftToRight));
 				}else {
 					obstacles.add(new Car(game, getBeforeFirstCase(), leftToRight));
 				}
@@ -186,6 +186,24 @@ public class Lane {
 		for (IObstacle obs : obstacles ) {
 			if(obs.covers(c)){
 				return obs.action();
+			}
+		}
+		return isRoad;
+	}
+	public boolean isSafeFrog2(Case c) {
+		if(c.ord != ord){
+			return true;
+		}
+		for (IPiege p : pieges) {
+			if (p.covers(c)) {
+				pieges.remove(p);
+				System.out.println("Piege");
+				return (p.action());
+			}
+		}
+		for (IObstacle obs : obstacles ) {
+			if(obs.covers(c)){
+				return obs.action2();
 			}
 		}
 		return isRoad;

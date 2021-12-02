@@ -91,4 +91,9 @@ public class EnvInf implements IEnvironment {
             lane.update();
         }
     }
+
+    @Override
+    public boolean isSafe2(Case c) {
+        return false;
+    }
 }
