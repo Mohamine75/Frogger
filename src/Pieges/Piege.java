@@ -2,16 +2,13 @@ package Pieges;
 
 import gameCommons.Game;
 import graphicalElements.Element;
+import images.Images;
 import util.Case;
-
-import java.awt.*;
 
 
     public class Piege implements IPiege {
-    protected final Game game;
-    protected Case position;
-    private final Color color =  Color.red;
-
+    private final Game game;
+    private Case position;
 
     public Piege(Game game, Case position) {
         this.game = game;
@@ -27,8 +24,7 @@ import java.awt.*;
     }
 
     public void addToGraphics() {
-        Color color = this.color;
-        game.getGraphic().add(new Element(position.absc, position.ord, color));
+        game.getGraphic().add(new Element(position.absc, position.ord, Images.bombImage));
 
     }
     public boolean covers(Case c){
@@ -36,11 +32,13 @@ import java.awt.*;
             return c.absc == position.absc;
         }
         return false;
-        }
-        public boolean action(){
+    }
+
+    public boolean action(){
             return false;
-        }
-        public boolean forbidden(Case c) {
+    }
+
+    public boolean forbidden(Case c) {
             return false;
         }
     }

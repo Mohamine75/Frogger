@@ -25,6 +25,5 @@ public interface IFrog {
 	 */
     void move(Direction key);
 
-	public void setScore(int bonus);
-
+	void setScore(int bonus);
 }

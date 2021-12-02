@@ -5,9 +5,9 @@ import util.Case;
 public interface IObstacle {
 
     void addToGraphics();
-
+    boolean action();
     void move();
-    public void setLeftPosition(Case c);
-    public Case getLeftPosition();
+    void setLeftPosition(Case c);
+    Case getLeftPosition();
     boolean covers(Case c);
 }

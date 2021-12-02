@@ -1,21 +1,23 @@
 package graphicalElements;
 
-import java.awt.*;
-
 import util.Case;
+
+import java.awt.*;
 
 
 public class Element extends Case {
-    public final Color color;
+    //public final Color color;
+    public Color color;
+    public Image image;
 
-    public Element(int absc, int ord, Color color) {
+    public Element(int absc, int ord, Image image) {
         super(absc, ord);
-        this.color = color;
+        this.image = image;
     }
-    
-    public Element(Case c, Color color) {
+
+    public Element(Case c, Image image) {
         super(c.absc, c.ord);
-        this.color = color;
+        this.image = image;
     }
-    
+
 }

@@ -9,7 +9,6 @@ public class FrogInf implements  IFrog {
     private Case position;
     private Direction direction;
     private final Game game;
-    private IFrog frog;
     private Integer score;
     private Integer scoreMax;
 
@@ -50,7 +49,6 @@ public class FrogInf implements  IFrog {
                     }
                 }
                 direction = Direction.right;
-                // Verif si en dehors de l'ecran
                 break;
             case left:
                 if(!game.getEnvironment().getLane(position.ord).forbidden(new Case(position.absc-1, position.ord))) {
@@ -84,8 +82,10 @@ public class FrogInf implements  IFrog {
                 break;
         }
     }
+
     public void setScore(int bonus){
         this.score += bonus;
     }
+
 }
 

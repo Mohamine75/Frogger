@@ -3,33 +3,30 @@ package environment;
 import Pieges.*;
 import gameCommons.Game;
 import graphicalElements.Element;
+import images.Images;
 import util.Case;
 
 import java.util.ArrayList;
-import java.awt.Color;
 
 public class Lane {
 	private final Game game;
 	private int ord;
 	private final int speed;
-	//private ArrayList<Car> cars = new ArrayList<>();
-	//private ArrayList<Log> logs = new ArrayList<>();
-	private ArrayList<IObstacle> obstacles = new ArrayList<>();
+	private final ArrayList<IObstacle> obstacles = new ArrayList<>();
 	private final boolean leftToRight;
 	private double density;
 	private int compteur = 0;
-	private ArrayList<IPiege> pieges = new ArrayList<>();
-	private boolean isRoad;
-
+	private final ArrayList<IPiege> pieges = new ArrayList<>();
+	private final boolean isRoad;
+	private  boolean isGrass = false;
 
 	public Lane(Game game, int ord) {
 		this.game = game;
 		this.ord = ord;
-		//this.density = 0;
 		this.leftToRight = true;
-		//this.cars = new ArrayList<>();
 		this.speed = 0;
 		this.isRoad= true;
+		this.isGrass = true;
 	}
 
 	public Lane(Game game, int ord, int speed, boolean leftToRight, double density, boolean isRoad) {
@@ -54,15 +51,20 @@ public class Lane {
 		}
 	}
 	public Lane(Game game, int ord, int speed, boolean leftToRight, double density) {
+		int speed1;
 		this.game = game;
 		this.ord = ord;
-		this.speed = speed;
+		speed1 = speed;
 		this.leftToRight = leftToRight;
 		this.density = density;
 		this.isRoad = game.randomGen.nextInt(10) != 1;
+		if(!this.isRoad){
+			this.density = 0.2;
+			speed1 = 3;
+		}
+		this.speed = speed1;
 		if (game.randomGen.nextInt(10) == 0) {
 			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
-			return;
 		}
 		if (game.randomGen.nextInt(10) == 1 && pieges.isEmpty()) {
 			pieges.add(new Tremplin(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
@@ -72,6 +74,9 @@ public class Lane {
 		}
 		if (game.randomGen.nextInt(15) == 3 && isRoad) {
 			pieges.add(new Tunnel(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
+		}
+		if(!isRoad){
+			pieges.add(new Bonus(game, new Case(game.randomGen.nextInt(game.width) - 1, ord),8));
 		}
 	}
 
@@ -102,14 +107,13 @@ public class Lane {
 
 	public void update() {
 		compteur++;
+		paintWindow();
 		if (compteur == speed) {
 			for (IObstacle obs : obstacles) {
 				obs.move();
 			}
 			this.compteur = 0;
 		}
-		paintWindow();
-		//mayAddCar();
 		mayAddObstacle();
 		for (IPiege p : pieges) {
 			p.addToGraphics();
@@ -124,29 +128,16 @@ public class Lane {
 		}
 	}
 
-	/*private void mayAddCar() {
-		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
-			if (game.randomGen.nextDouble() < density && getBeforeFirstCase().ord < (game.height-1)/2) {
-				cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
-			}
-		}
-	}*/
-
-	/*private void mayAddLog(){
-		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
-			if(game.randomGen.nextDouble() < density && getBeforeFirstCase().ord > (game.height-1)/2) {
-				logs.add(new Log(game, getBeforeFirstCase()));
-			}
-		}
-	}*/
 
 	private void mayAddObstacle(){
-		if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
+		if (isSafeAdd(getFirstCase()) && isSafeAdd(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
-				if (getBeforeFirstCase().ord > (game.height - 1) / 2)
-					obstacles.add(new Log(game, getBeforeFirstCase()));
-				else if (getBeforeFirstCase().ord < (game.height - 1) / 2)
+				if (!isRoad) {
+					obstacles.add(new Log(game, getBeforeFirstCase(),leftToRight));
+				}else {
 					obstacles.add(new Car(game, getBeforeFirstCase(), leftToRight));
+				}
+
 			}
 		}
 	}
@@ -165,37 +156,50 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public boolean isSafe(Case c) {
+	public boolean isSafeAdd(Case c) {
 		if (!pieges.isEmpty()) {
 			for (IPiege p : pieges) {
 				if (p.covers(c)) {
-					pieges.remove(p);
-					return (p.action());
+					return false;
 				}
 			}
 		}
 		for (IObstacle obs : obstacles ) {
-			if (obs.covers(c) && isRoad) {
+			if((obs.covers(c))){
 				return false;
 			}
-			/*if(obs.covers(c) && !isRoad) {
-				return true;
-			}
-			if(!obs.covers(c) && !isRoad) {
-				System.out.println("Water");
-				return false;
-			}*/
 		}
 		return true;
 	}
 
+	public boolean isSafeFrog(Case c) {
+		if(c.ord != ord){
+			return true;
+		}
+			for (IPiege p : pieges) {
+				if (p.covers(c)) {
+					pieges.remove(p);
+					System.out.println("Piege");
+					return (p.action());
+				}
+			}
+		for (IObstacle obs : obstacles ) {
+			if(obs.covers(c)){
+				return obs.action();
+			}
+		}
+		return isRoad;
+	}
+
 	public void paintWindow() {
-		Color color = Color.blue;
 		for (int i = 0; i < game.width; i++) {
 			if (!isRoad)
-				game.getGraphic().add(new Element(i, ord, color));
-			else{
-				game.getGraphic().add(new Element(i, ord, Color.BLACK));
+				game.getGraphic().add(new Element(i, ord, Images.water));
+			if(isRoad){
+				game.getGraphic().add(new Element(i, ord, Images.road));
+			}
+			if(isGrass){
+				game.getGraphic().add(new Element(i, ord, Images.grassImage));
 			}
 		}
 	}

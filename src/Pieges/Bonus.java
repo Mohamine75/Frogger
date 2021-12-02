@@ -2,17 +2,14 @@ package Pieges;
 
 import gameCommons.Game;
 import graphicalElements.Element;
+import images.Images;
 import util.Case;
-
-import java.awt.*;
 
 public class Bonus implements IPiege{
 
     private final Game game;
     private Case position;
-    private int valeur;
-    private final Color color =  Color.MAGENTA;
-
+    private final int valeur;
 
     public Bonus(Game game, Case position) {
         this.game = game;
@@ -35,8 +32,7 @@ public class Bonus implements IPiege{
     }
 
     public void addToGraphics(){
-        Color color = this.color;
-        game.getGraphic().add(new Element(position.absc,position.ord, color));
+        game.getGraphic().add(new Element(position.absc,position.ord, Images.pieceImage));
     }
 
     public boolean action(){
@@ -51,7 +47,6 @@ public class Bonus implements IPiege{
         return false;
     }
 
-    @Override
     public boolean forbidden(Case c) {
         return false;
     }

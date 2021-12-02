@@ -1,8 +1,7 @@
 package gameCommons;
 
-import util.Case;
 import environment.Lane;
-import java.util.ArrayList;
+import util.Case;
 public interface IEnvironment {
 
 	/**
@@ -18,8 +17,6 @@ public interface IEnvironment {
 	void add();
 	void decalageDown();
 	void decalageUp();
-	String toString();
-	ArrayList<Lane> getLanes();
 
 	Lane getLane(int ord);
 	/**
@@ -28,7 +25,7 @@ public interface IEnvironment {
 	 * @param c
 	 * @return vrai si la case est une case de victoire
 	 */
-	public boolean isWinningPosition(Case c);
+	boolean isWinningPosition(Case c);
 
 	/**
 	 * Effectue une �tape d'actualisation de l'environnement

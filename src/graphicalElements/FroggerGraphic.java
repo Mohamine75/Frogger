@@ -1,22 +1,25 @@
 package graphicalElements;
 
-import javax.swing.*;
-
 import gameCommons.IFrog;
 import util.Direction;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListener {
-	private final ArrayList<Element> elementsToDisplay;
-	private final int pixelByCase = 16;
-	private final int width;
-	private final int height;
+
+
+	private ArrayList<Element> elementsToDisplay;
+	private int pixelByCase = 20;
+	private int width;
+	private int height;
 	private IFrog frog;
-	private final JFrame frame;
+	private IFrog frogTwo;
+	private JFrame frame;
+
 
 	public FroggerGraphic(int width, int height) {
 		this.width = width;
@@ -35,11 +38,18 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 		frame.addKeyListener(this);
 	}
 
-	public void paintComponent(Graphics g) {
+	/*public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for (Element e : elementsToDisplay) {
 			g.setColor(e.color);
 			g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+		}
+	}*/
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for (Element e : elementsToDisplay) {
+			g.drawImage(e.image, pixelByCase * e.absc,pixelByCase * (height - 1 - e.ord),20,20,this);
 		}
 	}
 
@@ -51,17 +61,31 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			frog.move(Direction.up);
-			break;
-		case KeyEvent.VK_DOWN:
-			frog.move(Direction.down);
-			break;
-		case KeyEvent.VK_LEFT:
-			frog.move(Direction.left);
-			break;
-		case KeyEvent.VK_RIGHT:
-			frog.move(Direction.right);
+			// Fleches
+			case KeyEvent.VK_UP:
+				frog.move(Direction.up);
+				break;
+			case KeyEvent.VK_DOWN:
+				frog.move(Direction.down);
+				break;
+			case KeyEvent.VK_LEFT:
+				frog.move(Direction.left);
+				break;
+			case KeyEvent.VK_RIGHT:
+				frog.move(Direction.right);
+				break;
+			// ZQSD
+			case KeyEvent.VK_Z:
+				frogTwo.move(Direction.up);
+				break;
+			case KeyEvent.VK_S:
+				frogTwo.move(Direction.down);
+				break;
+			case KeyEvent.VK_Q:
+				frogTwo.move(Direction.left);
+				break;
+			case KeyEvent.VK_D:
+				frogTwo.move(Direction.right);
 		}
 	}
 
@@ -75,6 +99,10 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 
 	public void setFrog(IFrog frog) {
 		this.frog = frog;
+	}
+
+	public void setFrogTwo(IFrog frogTwo){
+		this.frogTwo = frogTwo;
 	}
 
 	public void endGameScreen(String s) {

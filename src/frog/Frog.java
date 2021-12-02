@@ -14,7 +14,7 @@ public class Frog implements IFrog {
 	private IFrog frog;
 	private int score;
 	private Integer scoreMax = 0;
-
+	private boolean playerTwo;
 
 	public Frog(Game game){
 		this.position = new Case(game.width/2,0 );
@@ -22,17 +22,21 @@ public class Frog implements IFrog {
 		this.score = 0;
 	}
 
-	@Override
+	public Frog(Game game, boolean playerTwo){
+		this.position = new Case(game.width /2 -3,0 );
+		this.game = game;
+		this.playerTwo = true;
+	}
+
 	public Case getPosition() {
 		return position;
 	}
 
-	@Override
+
 	public Direction getDirection() {
 		return direction;
 	}
 
-    @Override
     public Integer getScoreMax() {
         return scoreMax;
     }
@@ -42,17 +46,14 @@ public class Frog implements IFrog {
 		this.score += score;
 	}
 
-	@Override
     public void setPosition(Case position) {
 		this.position = position;
     }
 
-    @Override
     public Integer getScore() {
         return score;
     }
 
-    @Override
 
 	public void move(Direction key){
 		switch (key) {
@@ -99,4 +100,5 @@ public class Frog implements IFrog {
 	}
 
 
-}*/
+}
+*/

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Environment implements IEnvironment {
      private final Game game;
      private ArrayList<Lane> lanes;
-	//TODO
+
     public Environment(Game game){
         this.game = game;
         this.lanes= new ArrayList<>();
@@ -31,40 +31,22 @@ public class Environment implements IEnvironment {
 
     public boolean isSafe(Case c){
         for(Lane l : lanes){
-            if (!l.isSafe(c))
+            if (!l.isSafeFrog(c))
                 return false;
         }
         return true;
     }
 
+    public void add() {}
 
-
-
-
-
-
-
-    @Override
-    public void add() {
-
-    }
-
-    @Override
     public void decalageDown() {
 
     }
 
-    @Override
     public void decalageUp() {
 
     }
 
-    @Override
-    public ArrayList<Lane> getLanes() {
-        return null;
-    }
-
-    @Override
     public Lane getLane(int ord) {
         for (Lane l: lanes) {
             if( l.getOrd() == ord){

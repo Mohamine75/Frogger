@@ -2,8 +2,8 @@ package gameCommons;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import images.Images;
 
-import java.awt.*;
 import java.util.Random;
 
 //import frog.Frog;
@@ -19,8 +19,8 @@ public class Game {
 	public final double defaultDensity;
 	private IEnvironment environment;
 	private IFrog frog;
+	private IFrog frogTwo;
 	private final IFroggerGraphics graphic;
-
 	/**
 	 * 
 	 * @param graphic
@@ -58,7 +58,7 @@ public class Game {
 	public void setFrog(IFrog frog) {
 		this.frog = frog;
 	}
-
+	public void setFrogTwo(IFrog frogTwo) {this.frogTwo = frogTwo;}
 	/**
 	 * Lie l'objet environment a la partie
 	 * 
@@ -68,9 +68,6 @@ public class Game {
 		this.environment = environment;
 	}
 
-	public float getTimer() {
-		return timer;
-	}
 
 	/**
 	 * 
@@ -89,6 +86,14 @@ public class Game {
 		}
 		return false;
 	}
+	public void testLoseTwoPlayers() {
+		if(!environment.isSafe(frogTwo.getPosition())){
+			graphic.endGameScreen("Le joueur 1 a gagné !");
+		}
+		else if(!environment.isSafe(frog.getPosition())){
+			graphic.endGameScreen("Le joueur 2 a gagné !");
+		}
+	}
 
 	public boolean testWin() {
 		if(environment.isWinningPosition(frog.getPosition())){
@@ -97,7 +102,14 @@ public class Game {
 		}
 		return false;
 	}
-
+	public void testWinTwoPlayers() {
+		if(environment.isWinningPosition(frog.getPosition())){
+			graphic.endGameScreen("Le joueur 1 à gagné !");
+		}
+		if (environment.isWinningPosition(frogTwo.getPosition())){
+			graphic.endGameScreen("Le joueur 2 à gagné");
+		}
+	}
 	/**
 	 * Actualise l'environnement, affiche la grenouille et verifie la fin de
 	 * partie.
@@ -106,10 +118,14 @@ public class Game {
 	public void update() {
 		graphic.clear();
 		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+		this.graphic.add(new Element(frog.getPosition(), Images.frogImage));
+		//this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage));
 		timer+=0.1;
+
+		//testLoseTwoPlayers();
+		//testWinTwoPlayers();
 		testLose();
-		testWin();
+		//testWin();
 	}
 
 }

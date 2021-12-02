@@ -2,54 +2,54 @@ package environment;
 
 import gameCommons.Game;
 import graphicalElements.Element;
+import images.Images;
 import util.Case;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Car implements IObstacle{
-
-	private final Game game;
+	private Game game;
 	private Case leftPosition;
-	private final boolean leftToRight;
-	private final int length;
-	private final Color colorLtR = Color.MAGENTA;
-	private final Color colorRtL = Color.GREEN;
+	private boolean leftToRight;
+	private int length;
+	private Images imageClass = new Images();
+	private final ArrayList<Image> sprite;
 
-	//Constructeur(s)
 
+	//Constructor
 	public Car(Game game, Case leftPosition, boolean leftToRight) {
 		this.game = game;
 		this.leftPosition = leftPosition;
 		this.leftToRight = leftToRight;
-		this.length = 3;
+		this.length = game.randomGen.nextInt(2)+1;
+		this.sprite = imageClass.giveObstacle(leftToRight, length, false);
 	}
-	//TODO : ajout de methodes
 
-	/* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
 	public void addToGraphics() {
 		for (int i = 0; i < length; i++) {
-			Color color = colorRtL;
-			if (this.leftToRight){
-				color = colorLtR;
-			}
-			game.getGraphic().add(new Element(leftPosition.absc + i, leftPosition.ord, color));
+			game.getGraphic().add(new Element(leftPosition.absc + i, leftPosition.ord, sprite.get(i)));
 		}
 	}
+
+	public boolean action() {
+		return false;
+	}
+
 	public void setLeftPosition(Case c){
 		this.leftPosition = c;
 	}
 
-	@Override
 	public Case getLeftPosition() {
 		return leftPosition;
 	}
 
 	public void move(){
 		if(leftToRight) {
-			/*if(this.leftPosition.absc +length -1 > game.width){
+			if(this.leftPosition.absc +length -1 > game.width){
 				leftPosition =  new Case(0, leftPosition.ord);
 				return;
-			}*/
+			}
 			this.leftPosition = new Case(leftPosition.absc +1,leftPosition.ord);
 		}
 		else{
@@ -65,7 +65,6 @@ public class Car implements IObstacle{
 					}
 				}
 			}
-			return false;
-		}
-
+		return false;
+	}
 }

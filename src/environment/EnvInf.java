@@ -23,13 +23,16 @@ public class EnvInf implements IEnvironment {
         System.out.println(this);
     }
 
-    public ArrayList<Lane> getLanes() {
-        return lanes;
-    }
 
     public void add() {
-        lanes.add(new Lane(game, lanes.get(lanes.size()-1).getOrd()+1,
-                game.randomGen.nextInt(10 )+1, game.randomGen.nextBoolean(), 0.01));
+        if(lanes.size() %30 == 0){
+            lanes.add(new Lane(game,lanes.get(lanes.size() - 1).getOrd() + 1));
+        }
+        else{
+            lanes.add(new Lane(game, lanes.get(lanes.size() - 1).getOrd() + 1, game.randomGen.nextInt(10) + 1,
+                    game.randomGen.nextBoolean(), 0.01 * (lanes.size() / 20)));
+        }
+
     }
 
     public Lane getLane(int ord) {
@@ -45,28 +48,15 @@ public class EnvInf implements IEnvironment {
         return false;
     }
 
-    @Override
-    public String toString() {
-        String res = "lanes : ";
-        for (Lane l :
-                lanes) {
-            res += l.getOrd();
-        }
-        return res;
-    }
-
-
     public void decalageDown(){
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()-1);
             for (IObstacle v: l.getObstacles()) {
                 v.setLeftPosition(new Case(v.getLeftPosition().absc, v.getLeftPosition().ord - 1));
             }
-            if(!l.getPieges().isEmpty()) {
                 for (IPiege p : l.getPieges()) {
                     p.setPosition(new Case(p.getPosition().absc, p.getPosition().ord - 1));
                 }
-            }
         }
         add();
     }
@@ -74,7 +64,6 @@ public class EnvInf implements IEnvironment {
 
 
     public void decalageUp() {
-
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()+1);
             for(IObstacle v: l.getObstacles()){
@@ -88,7 +77,9 @@ public class EnvInf implements IEnvironment {
 
     public boolean isSafe(Case c) {
         for (int i = 0; i < lanes.size(); i++) {
-            if (!lanes.get(i).isSafe(c)) return false;
+            if (!lanes.get(i).isSafeFrog(c)) {
+                return false;
+            }
         }
         return true;
     }
@@ -96,9 +87,8 @@ public class EnvInf implements IEnvironment {
 
 
     public void update() {
-        for (int i = 0; i < lanes.size(); i++) {
-            lanes.get(i).update();
+        for (Lane lane : lanes) {
+            lane.update();
         }
-
     }
 }

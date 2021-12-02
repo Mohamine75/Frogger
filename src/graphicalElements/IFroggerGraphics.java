@@ -1,5 +1,4 @@
 package graphicalElements;
-import util.Case;
 import gameCommons.IFrog;
 
 public interface IFroggerGraphics {
@@ -26,7 +25,7 @@ public interface IFroggerGraphics {
      * @param frog
      */
     void setFrog(IFrog frog);
-    
+     void setFrogTwo(IFrog frogTwo);
     /**
      * Lance un �cran de fin de partie
      * @param message le texte � afficher

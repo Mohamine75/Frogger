@@ -5,13 +5,13 @@ import util.Case;
 
 public interface IPiege {
 
-    public Case getPosition();
+     Case getPosition();
 
-    public void setPosition(Case position);
+     void setPosition(Case position);
 
-    public void addToGraphics();
-    public boolean action();
+     void addToGraphics();
+     boolean action();
 
-    public boolean covers(Case c);
-    public boolean forbidden(Case c);
+     boolean covers(Case c);
+     boolean forbidden(Case c);
 }
