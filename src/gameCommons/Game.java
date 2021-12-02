@@ -118,8 +118,8 @@ public class Game {
 	public void update() {
 		graphic.clear();
 		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Images.frogImage));
-		//this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage));
+		this.graphic.add(new Element(frog.getPosition(), Images.frogImage2));
+		//this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage2));
 		timer+=0.1;
 
 		//testLoseTwoPlayers();

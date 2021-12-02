@@ -184,12 +184,21 @@ public class Images {
             e.printStackTrace();
         }
     }
-    // Frog
+    // Frogs
 
     public static Image frogImage;
     static {
         try {
             frogImage = ImageIO.read(new File("src/images/frog.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Image frogImage2;
+    static {
+        try {
+            frogImage2 = ImageIO.read(new File("src/images/frog2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
