@@ -3,8 +3,9 @@ package environment;
 import Pieges.*;
 import gameCommons.Game;
 import graphicalElements.Element;
-import images.Images;
 import util.Case;
+import images.*;
+
 
 import java.util.ArrayList;
 
