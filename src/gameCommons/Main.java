@@ -1,7 +1,8 @@
 package gameCommons;
 
+import environment.EnvInf;
 import environment.Environment;
-import frog.Frog;
+import frog.*;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 
@@ -31,30 +32,23 @@ public class Main {
 		//Cr�ation de l'interface graphique
 		IFroggerGraphics graphic = new FroggerGraphic(width, height);
 		//Cr�ation de la partie
-		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
-		//Cr�ation et liason de la grenouille
-		IFrog frog = new Frog(game);
+		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity, true, true);
 
-		game.setFrog(frog);
-		graphic.setFrog(frog);
-
-		IFrog frog1 = new Frog(game);
-		game.setFrogTwo(frog1);
-		graphic.setFrogTwo(frog1);
-		//Cr�ation et liaison de l'environnement
-		IEnvironment env = new Environment(game);
-		game.setEnvironment(env);
 		//Boucle principale : l'environnement s'acturalise tous les tempo milisecondes
 		File file = new File("src/Music/Doom.wav");
 		File file2 = new File("src/Music/Gta.wav");
 		File file3 = new File("src/Music/Naruto.wav");
+
+		// Musique
 		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 		Clip clip = AudioSystem.getClip();
 		clip.open(audioStream);
 		clip.start();
+
 		AudioInputStream audioStream2 = AudioSystem.getAudioInputStream(file2);
 		Clip clip2 = AudioSystem.getClip();
 		clip2.open(audioStream2);
+
 		AudioInputStream audioStream3 = AudioSystem.getAudioInputStream(file3);
 		Clip clip3 = AudioSystem.getClip();
 		clip3.open(audioStream3);

@@ -1,5 +1,9 @@
 package gameCommons;
 
+import environment.EnvInf;
+import environment.Environment;
+import frog.Frog;
+import frog.FrogInf;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
 import images.Images;
@@ -9,7 +13,7 @@ import java.util.Random;
 //import frog.Frog;
 
 public class Game {
-
+	private boolean partie  = true;
 	public final Random randomGen = new Random();
 	// Caracteristique de la partie
 	public final int width;
@@ -20,6 +24,7 @@ public class Game {
 	private IEnvironment environment;
 	private IFrog frog;
 	private IFrog frogTwo;
+	private boolean isTwoPlayers;
 	private final IFroggerGraphics graphic;
 	/**
 	 * 
@@ -34,13 +39,24 @@ public class Game {
 	 * @param defaultDensity
 	 *            densite de voiture utilisee par defaut pour les routes
 	 */
-	public Game(IFroggerGraphics graphic, int width, int height, int minSpeedInTimerLoop, double defaultDensity) {
+	public Game(IFroggerGraphics graphic, int width, int height, int minSpeedInTimerLoop, double defaultDensity, boolean isTwoPlayers, boolean isEndless) {
 		super();
 		this.graphic = graphic;
 		this.width = width;
 		this.height = height;
 		this.minSpeedInTimerLoops = minSpeedInTimerLoop;
 		this.defaultDensity = defaultDensity;
+		this.isTwoPlayers = isTwoPlayers;
+		this.frog = new Frog(this);
+		if(isTwoPlayers)
+			this.frogTwo = new Frog(this, true);
+		if(isEndless) {
+			this.environment = new EnvInf(this);
+			this.frog = new FrogInf(this);
+			this.isTwoPlayers = false;
+		}
+		else
+			this.environment = new Environment(this);
 	}
 
 	public IFrog getFrog() {
@@ -62,7 +78,6 @@ public class Game {
 	public void setFrog(IFrog frog) {
 		this.frog = frog;
 	}
-	public void setFrogTwo(IFrog frogTwo) {this.frogTwo = frogTwo;}
 	/**
 	 * Lie l'objet environment a la partie
 	 * 
@@ -86,6 +101,7 @@ public class Game {
 		if(!environment.isSafe(frog.getPosition())){
 			graphic.endGameScreen("Perdu , score :" + frog.getScore()
 			+"\n Meilleur score: " +frog.getScoreMax() +  " " + timer);
+			this.partie = false;
 			return true;
 		}
 		return false;
@@ -102,6 +118,7 @@ public class Game {
 	public boolean testWin() {
 		if(environment.isWinningPosition(frog.getPosition())){
 			graphic.endGameScreen("Gagné !!");
+			this.partie = false;
 			return true;
 		}
 		return false;
@@ -120,16 +137,27 @@ public class Game {
 	 */
 
 	public void update() {
-		graphic.clear();
-		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Images.frogImage));
-		this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage2));
-		timer+=0.1;
+		if (partie) {
+			timer += 0.1;
+			graphic.clear();
+			environment.update();
+			// Mode deux joueurs
+			if (this.isTwoPlayers) {
+				graphic.setFrog(frog);
+				graphic.setFrogTwo(frogTwo);
+				this.graphic.add(new Element(frog.getPosition(), Images.frogImage));
+				this.graphic.add(new Element(frogTwo.getPosition(), Images.frogImage2));
+				testLoseTwoPlayers();
+				testWinTwoPlayers();
+			// Mode un joueur
+			} else {
+				graphic.setFrog(frog);
+				this.graphic.add(new Element(frog.getPosition(), Images.frogImage));
+				testLose();
+				testWin();
+			}
 
-		testLoseTwoPlayers();
-		testWinTwoPlayers();
-		testLose();
-		testWin();
+		}
 	}
 
 }

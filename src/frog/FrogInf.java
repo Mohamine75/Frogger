@@ -1,4 +1,4 @@
-/*
+package frog;
 
 import gameCommons.Game;
 import gameCommons.IFrog;
@@ -87,5 +87,5 @@ public class FrogInf implements  IFrog {
         this.score += bonus;
     }
 
-}*/
+}
 
