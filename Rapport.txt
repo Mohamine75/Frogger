@@ -1,0 +1,23 @@
+ZEMALI Mohamed Amine
+YAHI YANIS 
+
+Rapport de Projet IPO
+
+	Le travail effectué :
+Nous avons traité tous les points du projet, donc les étapes 1,2 et 3, tous les éléments complémentaires ainsi que les bonus (à l’exception d’Environnement 2D libre).  Nous avons dans l’ordre fait la partie 1, puis la 2 et la 3. Après cela, nous avons réparti les tâches puisque les choses traitées étaient assez indépendantes pour le faire, de plus, cela fut un gain de temps remarquable ainsi qu’un meilleur travail d’équipe. Nous avons fait quelque choix personnelles bien évidemment, principalement l’ajout de fonctionnalités non obligatoires, mais qui nous tenaient à cœur.
+
+	Difficultés rencontrées :
+
+Nous avons rencontré quelques difficultés au cours du projet. La première et celle qui persista longtemps, fut de coder sur un environnement que nous n’avions pas créé de nous même. En effet, nous devions comprendre comment le programme marchait, l’affichage notamment nous posait d’ENORMES problèmes, et lire le code en comprenant ce qu’il faut comprendre pour avancer. Nous avons par la suite bloqué un instant sur la partie 3, Infinite Froggers, en effet l’affichage nous était non intuitif, nous pensions que les lanes étaient affichées avec les voitures par une fonction commune (qu’ils étaient « collés », alors que les 2 sont affichées d’après leur ordonnées. Nous avons d’abord penser à faire deux tableaux, voies actives et voies supprimés, puis de remove et add en fonction des déplacements de la Grenouille (très compliqué à implémenter), puis nous avons compris que l’ordonné était la clé, nous avons donc simplement baissé ou augmenter l’ordonné de chaque élément selon le mouvement de la grenouille(voir FrogInf). Après ça, nous sommes allés assez vite, le problème restant était de coder séparément mais de façon compatible au niveau du code comme de la répartition du travail.
+Répartition du travail :
+Comme dit plus haut, après la partie 3, nous nous sommes répartis le travail.
+Yanis :
+Chargé du bonus « Deux joueurs », « Meilleur rendu graphique » et focus sur Environnement Fini,Interface IObstacles.
+Mohamed :
+Chargé de toutes les cases spéciales, du Timer, du Score, focus sur Environnement infini, Interface IPieges.
+
+Nous nous sommes chargé tous les deux de lignes d’eau. Ensuite nous nous sommes assurés que le travail de l’autre marchait dans son environnement, puis nous avons fusionnés nos parties bonus.
+
+Ensuite, nous avons fait des rectificatifs afin d’optimiser le jeu, meilleurs images, mouvement + fluide de la grenouille sur les rondins, ajout de Musique de fond + bruit sonore avec certaines actions, cleanup et optimisation du code.
+Nous sommes assez contents de notre projet, pour l’améliorer, une idée serait d’ajouter des boutons pour passer d’un mode à l’autre, ou encore un historique des meilleurs scores.
+
