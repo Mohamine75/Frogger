@@ -6,7 +6,7 @@ import images.Images;
 import util.Case;
 
 
-    public class Piege implements IPiege {
+public class Piege implements IPiege {
     private final Game game;
     private Case position;
 
@@ -35,10 +35,10 @@ import util.Case;
     }
 
     public boolean action(){
-            return false;
+        return false;
     }
 
     public boolean forbidden(Case c) {
-            return false;
-        }
+        return false;
     }
+}

@@ -30,18 +30,18 @@ public class EnvInf implements IEnvironment {
         }
         else{
             lanes.add(new Lane(game, lanes.get(lanes.size() - 1).getOrd() + 1, game.randomGen.nextInt(10) + 1,
-                    game.randomGen.nextBoolean(), 0.01 * (lanes.size() / 20)));
+                    game.randomGen.nextBoolean(), 0.01 * 1.01));
         }
 
     }
 
     public Lane getLane(int ord) {
-       for(Lane l : lanes){
-           if (l.getOrd()== ord){
-               return l;
-           }
-       }
-       return null;
+        for(Lane l : lanes){
+            if (l.getOrd()== ord){
+                return l;
+            }
+        }
+        return null;
     }
 
     public boolean isWinningPosition(Case c) {
@@ -54,9 +54,9 @@ public class EnvInf implements IEnvironment {
             for (IObstacle v: l.getObstacles()) {
                 v.setLeftPosition(new Case(v.getLeftPosition().absc, v.getLeftPosition().ord - 1));
             }
-                for (IPiege p : l.getPieges()) {
-                    p.setPosition(new Case(p.getPosition().absc, p.getPosition().ord - 1));
-                }
+            for (IPiege p : l.getPieges()) {
+                p.setPosition(new Case(p.getPosition().absc, p.getPosition().ord - 1));
+            }
         }
         add();
     }

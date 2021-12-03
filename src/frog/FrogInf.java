@@ -1,9 +1,12 @@
-/*
+package frog;
 
 import gameCommons.Game;
 import gameCommons.IFrog;
+import images.Images;
 import util.Case;
 import util.Direction;
+
+import java.awt.*;
 
 public class FrogInf implements  IFrog {
     private Case position;
@@ -44,7 +47,7 @@ public class FrogInf implements  IFrog {
         switch (key) {
             case right:
                 if(!game.getEnvironment().getLane(position.ord).forbidden(new Case(position.absc + 1, position.ord))) {
-                    if (position.absc + 1 <= game.width) {
+                    if (position.absc + 1 < game.width) {
                         this.position = new Case(position.absc + 1, position.ord);
                     }
                 }
@@ -82,10 +85,22 @@ public class FrogInf implements  IFrog {
                 break;
         }
     }
+    public Image getFrogImage(){
+            switch (direction) {
+        case up:
+            return Images.frogImage;
 
+        case down:
+            return Images.frogDownImage;
+
+        case left:
+            return Images.frogLeftImage;
+    }
+		return Images.frogRightImage;
+}
     public void setScore(int bonus){
         this.score += bonus;
     }
 
-}*/
+}
 

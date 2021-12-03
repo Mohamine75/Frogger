@@ -4,6 +4,7 @@ import gameCommons.Game;
 import graphicalElements.Element;
 import images.Images;
 import util.Case;
+import util.Direction;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,9 +37,16 @@ public class Log implements IObstacle{
     }
 
     public void move(){
+        if(covers(game.getFrog().getPosition())){
+            actionGrenouille(false);
+        }
+        if(covers(game.getFrogTwo().getPosition())){
+            actionGrenouille(true);
+        }
         if(leftToRight) {
             this.leftPosition = new Case(leftPosition.absc + 1, leftPosition.ord);
         }
+
         else {
             this.leftPosition = new Case(leftPosition.absc - 1, leftPosition.ord);
         }
@@ -54,19 +62,23 @@ public class Log implements IObstacle{
     }
 
     public boolean action(){
-        if(leftToRight){
-            if(leftPosition.absc == game.width){
-                return false;
+        return true;
+    }
+    private void actionGrenouille(boolean sndFrog){
+        if (!sndFrog) {
+            if (leftToRight) {
+                game.getFrog().move(Direction.right);
+            } else {
+                game.getFrog().move(Direction.left);
             }
-            game.getFrog().setPosition(new Case(leftPosition.absc + 1, game.getFrog().getPosition().ord));
         }
         else{
-            if(leftPosition.absc == 0){
-                return false;
-            }
-            game.getFrog().setPosition(new Case(leftPosition.absc, game.getFrog().getPosition().ord));
+            if (leftToRight) {
+            game.getFrogTwo().move(Direction.right);
+        } else {
+            game.getFrogTwo().move(Direction.left);
         }
-        return true;
+        }
     }
 
     public boolean covers(Case c){
@@ -80,12 +92,6 @@ public class Log implements IObstacle{
         return false;
     }
     public boolean action2(){
-        if(leftToRight){
-            game.getFrogTwo().setPosition(new Case(leftPosition.absc + 1, game.getFrogTwo().getPosition().ord));
-        }
-        else{
-            game.getFrogTwo().setPosition(new Case(leftPosition.absc, game.getFrogTwo().getPosition().ord));
-        }
         return true;
     }
 }

@@ -5,8 +5,9 @@ import graphicalElements.Element;
 import images.Images;
 import util.Case;
 
-public class Bonus implements IPiege{
+import java.io.File;
 
+public class Bonus implements IPiege{
     private final Game game;
     private Case position;
     private final int valeur;
@@ -36,6 +37,7 @@ public class Bonus implements IPiege{
     }
 
     public boolean action(){
+        game.music.PlayMusicBonus(new File("src/Music/sonic_ring.wav"));
         game.getFrog().setScore(valeur);
         return true;
 

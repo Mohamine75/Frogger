@@ -3,8 +3,11 @@ package frog;
 
 import gameCommons.Game;
 import gameCommons.IFrog;
+import images.Images;
 import util.Case;
 import util.Direction;
+
+import java.awt.*;
 
 public class Frog implements IFrog {
 
@@ -97,6 +100,34 @@ public class Frog implements IFrog {
 
 				break;
 		}
+	}
+
+	public Image getFrogImage(){
+		if(playerTwo){
+			switch (this.direction){
+				case up:
+					return Images.frogImage2;
+				case down:
+					return Images.frogDownImage2;
+
+				case left:
+					return Images.frogLeftImage2;
+
+				case right:
+					return Images.frogRightImage2;
+			}
+		}
+		switch (direction) {
+			case up:
+				return Images.frogImage;
+
+			case down:
+				return Images.frogDownImage;
+
+			case left:
+				return Images.frogLeftImage;
+		}
+		return Images.frogRightImage;
 	}
 
 

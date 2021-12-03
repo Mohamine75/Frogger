@@ -6,6 +6,7 @@ import images.Images;
 import util.Case;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class Car implements IObstacle{
@@ -33,6 +34,7 @@ public class Car implements IObstacle{
 	}
 
 	public boolean action() {
+		game.music.PlayMusicBonus(new File("src/Music/Gta.wav"));
 		return false;
 	}
 

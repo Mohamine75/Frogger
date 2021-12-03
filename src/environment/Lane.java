@@ -55,12 +55,12 @@ public class Lane {
 		this.game = game;
 		this.ord = ord;
 		speed1 = speed;
-		this.leftToRight = leftToRight;
+		this.leftToRight = ord%2==0;
 		this.density = density;
 		this.isRoad = game.randomGen.nextInt(10) != 1;
 		if(!this.isRoad){
-			this.density = 0.2;
-			speed1 = 3;
+			this.density = 0.15;
+			speed1 = 4;
 		}
 		this.speed = speed1;
 		if (game.randomGen.nextInt(10) == 0) {
@@ -179,8 +179,7 @@ public class Lane {
 			for (IPiege p : pieges) {
 				if (p.covers(c)) {
 					pieges.remove(p);
-					System.out.println("Piege");
-					return (p.action());
+					return p.action();
 				}
 			}
 		for (IObstacle obs : obstacles ) {

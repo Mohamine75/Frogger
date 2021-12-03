@@ -189,7 +189,7 @@ public class Images {
     public static Image frogImage;
     static {
         try {
-            frogImage = ImageIO.read(new File("src/images/frog.png"));
+            frogImage = ImageIO.read(new File("src/images/frogs/frog_one/frog.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -198,7 +198,7 @@ public class Images {
     public static Image frogImage2;
     static {
         try {
-            frogImage2 = ImageIO.read(new File("src/images/frog2.png"));
+            frogImage2 = ImageIO.read(new File("src/images/frogs/frog_two/frog2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -258,8 +258,65 @@ public class Images {
             e.printStackTrace();
         }
     }
+    //Frog 1
 
-    public static Image whiteCarImageRight;
+    public static Image frogDownImage;
+    static {
+        try {
+            frogDownImage = ImageIO.read(new File("src/images/frogs/frog_one/frog_down.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Image frogLeftImage;
+    static {
+        try {
+            frogLeftImage = ImageIO.read(new File("src/images/frogs/frog_one/frog_left.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Image frogRightImage;
+    static {
+        try {
+            frogRightImage = ImageIO.read(new File("src/images/frogs/frog_one/frog_right.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Frog 2
+
+    public static Image frogDownImage2;
+    static {
+        try {
+            frogDownImage2 = ImageIO.read(new File("src/images/frogs/frog_two/frog2_down.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Image frogLeftImage2;
+    static {
+        try {
+            frogLeftImage2 = ImageIO.read(new File("src/images/frogs/frog_two/frog2_left.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Image frogRightImage2;
+    static {
+        try {
+            frogRightImage2 = ImageIO.read(new File("src/images/frogs/frog_two/frog2_right.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public static Image whiteCarImageRight;
     static {
         try {
             whiteCarImageRight = ImageIO.read(new File("src/images/road_obstacles/right/white_car_right.png"));

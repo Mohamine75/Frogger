@@ -5,6 +5,8 @@ import graphicalElements.Element;
 import images.Images;
 import util.Case;
 
+import java.io.File;
+
 
 public class Tremplin implements IPiege {
     private final Game game;
@@ -29,9 +31,9 @@ public class Tremplin implements IPiege {
     }
 
     public boolean action(){
+        game.music.PlayMusicBonus(new File("src/Music/boing.wav"));
         game.getFrog().move(game.getFrog().getDirection());
         return true;
-
     }
 
     public boolean covers(Case c){

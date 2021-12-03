@@ -1,27 +1,34 @@
 package Music;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.*;
+import javax.sound.sampled.*;
 import java.io.File;
+import java.io.IOException;
 
 public class PlayMusic {
-
-
-    public PlayMusic(){};
-    public static void playMusic(String filePath){
-        try
-        {
-            File file = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
+    private String nom;
+    public PlayMusic(String nom){
+           this.nom = nom;
         }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null,"Erreur musique");
+
+        public void PlayMusicBonus(File file){
+            AudioInputStream audioStream = null;
+            try {
+                audioStream = AudioSystem.getAudioInputStream(file);
+            } catch (UnsupportedAudioFileException | IOException e) {
+                e.printStackTrace();
+            }
+            Clip clip = null;
+            try {
+                clip = AudioSystem.getClip();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
+            try {
+                clip.open(audioStream);
+            } catch (LineUnavailableException | IOException e) {
+                e.printStackTrace();
+            }
+            clip.start();
         }
 
     }
-}

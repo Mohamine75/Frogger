@@ -3,6 +3,8 @@ package gameCommons;
 import util.Case;
 import util.Direction;
 
+import java.awt.*;
+
 public interface IFrog {
 	
 	/**
@@ -24,6 +26,6 @@ public interface IFrog {
 	 * @param key
 	 */
     void move(Direction key);
-
+	 Image getFrogImage();
 	void setScore(int bonus);
 }
