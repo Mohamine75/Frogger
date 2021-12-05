@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Banque de données d'images
+ */
 public class Images {
-    public final Random randomGen = new Random();
 
+    public final Random randomGen = new Random();
     private final ArrayList<Image> toRight = new ArrayList<>();
     private final ArrayList<Image> toLeft = new ArrayList<>();
     private final ArrayList<Image> blueTruckRight = new ArrayList<>();
@@ -37,6 +40,13 @@ public class Images {
         this.logThreeRight.addAll(Arrays.asList(logThreeImageRight, logThreeImageRight2, logThreeImageRight3));
     }
 
+    /**
+     * Donne une image selon sa direction sa taille et sa nature
+     * @param directionToRight
+     * @param length
+     * @param isWater
+     * @return
+     */
     public ArrayList<Image> giveObstacle(boolean directionToRight, int length, boolean isWater){
         ArrayList<Image> res = new ArrayList<>();
         switch(length){
@@ -460,7 +470,5 @@ public class Images {
             e.printStackTrace();
         }
     }
-
-
 
 }

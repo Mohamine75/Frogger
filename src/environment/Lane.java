@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Lane {
 	private final Game game;
 	private int ord;
-	private final int speed;
+	private int speed;
 	private final ArrayList<IObstacle> obstacles = new ArrayList<>();
 	private final boolean leftToRight;
 	private double density;
@@ -21,6 +21,11 @@ public class Lane {
 	private final boolean isRoad;
 	private  boolean isGrass = false;
 
+	/**
+	 * Constructeur de lignes vides sans obstacles pour les deux environements
+	 * @param game
+	 * @param ord
+	 */
 	public Lane(Game game, int ord) {
 		this.game = game;
 		this.ord = ord;
@@ -30,6 +35,15 @@ public class Lane {
 		this.isGrass = true;
 	}
 
+	/**
+	 * Constructeur de lignes de jeu pour environement normal
+	 * @param game
+	 * @param ord
+	 * @param speed
+	 * @param leftToRight
+	 * @param density
+	 * @param isRoad
+	 */
 	public Lane(Game game, int ord, int speed, boolean leftToRight, double density, boolean isRoad) {
 		this.game = game;
 		this.ord = ord;
@@ -37,43 +51,58 @@ public class Lane {
 		this.leftToRight = leftToRight;
 		this.density = density;
 		this.isRoad = isRoad;
-		if (game.randomGen.nextInt(10) == 0) {
+
+		// Générateur aléatoire de pièges selon la configuration
+
+		if (game.randomGen.nextInt(10) == 1) {
 			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 			return;
 		}
 		if (game.randomGen.nextInt(10) == 1 && pieges.isEmpty()) {
 			pieges.add(new Tremplin(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
-		if (game.randomGen.nextInt(20) == 2) {
+		if (game.randomGen.nextInt(20) == 1) {
 			pieges.add(new Bonus(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
-		if (game.randomGen.nextInt(15) == 3 && isRoad) {
+		if (game.randomGen.nextInt(15) == 1 && isRoad) {
 			pieges.add(new Tunnel(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
 	}
+
+	/**
+	 * Constructeur de lignes pour environement infini
+	 * @param game
+	 * @param ord
+	 * @param speed
+	 * @param leftToRight
+	 * @param density
+	 */
 	public Lane(Game game, int ord, int speed, boolean leftToRight, double density) {
-		int speed1;
 		this.game = game;
 		this.ord = ord;
-		speed1 = speed;
-		this.leftToRight = ord%2==0;
+		this.speed = speed;
+		this.leftToRight = leftToRight;
 		this.density = density;
 		this.isRoad = game.randomGen.nextInt(10) != 1;
+
+		// Si ligne d'eau, densité et vitesse prédéfinie.
 		if(!this.isRoad){
 			this.density = 0.15;
-			speed1 = 4;
+			this.speed = 4;
 		}
-		this.speed = speed1;
-		if (game.randomGen.nextInt(10) == 0) {
+
+		// Générateur aléatoire de pièges selon la configuration + ajout d'une piece de 8 à chaque ligne d'eau
+
+		if (game.randomGen.nextInt(10) == 1) {
 			pieges.add(new Piege(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
 		if (game.randomGen.nextInt(10) == 1 && pieges.isEmpty()) {
 			pieges.add(new Tremplin(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
-		if (game.randomGen.nextInt(20) == 2) {
+		if (game.randomGen.nextInt(20) == 1) {
 			pieges.add(new Bonus(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
-		if (game.randomGen.nextInt(15) == 3 && isRoad) {
+		if (game.randomGen.nextInt(15) == 1 && isRoad) {
 			pieges.add(new Tunnel(game, new Case(game.randomGen.nextInt(game.width) - 1, ord)));
 		}
 		if(!isRoad){
@@ -85,10 +114,23 @@ public class Lane {
 		return ord;
 	}
 
+	public ArrayList<IObstacle> getObstacles() {
+		return obstacles;
+	}
+
+	public ArrayList<IPiege> getPieges() {
+		return pieges;
+	}
+
 	public void setOrd(int ord) {
 		this.ord = ord;
 	}
 
+	/**
+	 * Vérifie si la case c est une case tunnel
+	 * @param c
+	 * @return true si tunnel sinon false
+	 */
 	public boolean forbidden(Case c) {
 		for (IPiege p : pieges) {
 			if (p.forbidden(c)) {
@@ -98,14 +140,10 @@ public class Lane {
 		return false;
 	}
 
-	public ArrayList<IObstacle> getObstacles() {
-		return obstacles;
-	}
 
-	public ArrayList<IPiege> getPieges() {
-		return pieges;
-	}
-
+	/**
+	 * Met a jour la lane et tous ses composant en les réaffichant.
+	 */
 	public void update() {
 		compteur++;
 		paintWindow();
@@ -130,18 +168,21 @@ public class Lane {
 	}
 
 
+	/**
+	 * Ajoute un obstacle à l'ArrayList d'obstacles si l'ajout de l'obstacle n'en chevauche pas un autre
+	 */
 	private void mayAddObstacle(){
-		if (isSafeAdd(getFirstCase()) && isSafeAdd(getBeforeFirstCase())) {
+		if (isSafeObstacle(getFirstCase()) && isSafeObstacle(getBeforeFirstCase())) {
 			if (game.randomGen.nextDouble() < density) {
 				if (!isRoad) {
 					obstacles.add(new Log(game, getFirstCase(),leftToRight));
 				}else {
 					obstacles.add(new Car(game, getBeforeFirstCase(), leftToRight));
 				}
-
 			}
 		}
 	}
+
 
 	private Case getFirstCase() {
 		if (leftToRight) {
@@ -157,7 +198,13 @@ public class Lane {
 			return new Case(game.width, ord);
 	}
 
-	public boolean isSafeAdd(Case c) {
+
+	/**
+	 * Vérifie si la case est déjà occupée par un obstacle ou un piège
+	 * @param c
+	 * @return true si possible, false sinon
+	 */
+	public boolean isSafeObstacle(Case c) {
 		if (!pieges.isEmpty()) {
 			for (IPiege p : pieges) {
 				if (p.covers(c)) {
@@ -173,6 +220,12 @@ public class Lane {
 		return true;
 	}
 
+
+	/**
+	 * Vérifie si la case de la grenouille requiert une action (mort, ou autre action de piège)
+	 * @param c
+	 * @return true si case sans danger, false sinon
+	 */
 	public boolean isSafeFrog(Case c) {
 		if(c.ord != ord){
 			return true;
@@ -190,6 +243,13 @@ public class Lane {
 		}
 		return isRoad;
 	}
+
+
+	/**
+	 * Vérifie si la case de la grenouille 2 requiert une action (mort, ou autre action de piège)
+	 * @param c
+	 * @return true si case sans danger, false sinon
+	 */
 	public boolean isSafeFrog2(Case c) {
 		if(c.ord != ord){
 			return true;
@@ -209,6 +269,10 @@ public class Lane {
 		return isRoad;
 	}
 
+
+	/**
+	 * ajoute les elements graphique à la fenêtre
+	 */
 	public void paintWindow() {
 		for (int i = 0; i < game.width; i++) {
 			if (!isRoad)

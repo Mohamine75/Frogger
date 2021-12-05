@@ -15,20 +15,25 @@ public class Log implements IObstacle{
     private final int length = 3;
     private Case leftPosition;
     private final boolean leftToRight;
-    private final Images imageClass = new Images();
     private final ArrayList<Image> sprite;
 
-   /* public Log(Game game, Case leftPosition){
-        this.game = game;
-        this.leftPosition = leftPosition;
-        this.length = game.randomGen.nextInt(4)+2;
-    }*/
     public Log(Game game,Case leftPosition,boolean leftToRight){
         this.game = game;
         this.leftPosition = leftPosition;
         this.leftToRight = leftToRight;
+        Images imageClass = new Images();
         this.sprite = imageClass.giveObstacle(leftToRight, length, true);
     }
+
+
+    public void setLeftPosition(Case c){
+        this.leftPosition = c;
+    }
+
+    public Case getLeftPosition() {
+        return leftPosition;
+    }
+
 
     public void addToGraphics() {
         for(int i = 0; i < length; i++){
@@ -36,35 +41,11 @@ public class Log implements IObstacle{
         }
     }
 
-    public void move(){
-        if(covers(game.getFrog().getPosition())){
-            actionGrenouille(false);
-        }
-        if(covers(game.getFrogTwo().getPosition())){
-            actionGrenouille(true);
-        }
-        if(leftToRight) {
-            this.leftPosition = new Case(leftPosition.absc + 1, leftPosition.ord);
-        }
-
-        else {
-            this.leftPosition = new Case(leftPosition.absc - 1, leftPosition.ord);
-        }
-    }
-
-    public void setLeftPosition(Case c){
-        this.leftPosition = c;
-    }
-
-    @Override
-    public Case getLeftPosition() {
-        return leftPosition;
-    }
-
-    public boolean action(){
-        return true;
-    }
-    private void actionGrenouille(boolean sndFrog){
+    /**
+     * Bouge la grenouille sur le rondin
+     * @param sndFrog
+     */
+    private void moveGrenouille(boolean sndFrog){
         if (!sndFrog) {
             if (leftToRight) {
                 game.getFrog().move(Direction.right);
@@ -81,6 +62,35 @@ public class Log implements IObstacle{
         }
     }
 
+
+    public boolean action(){
+        return true;
+    }
+
+    public boolean action2(){
+        return true;
+    }
+
+
+    public void move(){
+        if(covers(game.getFrog().getPosition())){
+            moveGrenouille(false);
+        }
+        if(game.isTwoPlayers) {
+            if (covers(game.getFrogTwo().getPosition())) {
+                moveGrenouille(true);
+            }
+        }
+        if(leftToRight) {
+            this.leftPosition = new Case(leftPosition.absc + 1, leftPosition.ord);
+        }
+
+        else {
+            this.leftPosition = new Case(leftPosition.absc - 1, leftPosition.ord);
+        }
+    }
+
+
     public boolean covers(Case c){
         if(c.ord == leftPosition.ord){
             for (int i = 0; i < length; i++) {
@@ -91,7 +101,5 @@ public class Log implements IObstacle{
         }
         return false;
     }
-    public boolean action2(){
-        return true;
-    }
+
 }

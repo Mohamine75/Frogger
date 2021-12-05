@@ -14,7 +14,6 @@ public class Frog implements IFrog {
 	private Case position;
 	private Direction direction = Direction.up;
 	private Game game;
-	private IFrog frog;
 	private int score;
 	private Integer scoreMax = 0;
 	private boolean playerTwo;
@@ -35,7 +34,6 @@ public class Frog implements IFrog {
 		return position;
 	}
 
-
 	public Direction getDirection() {
 		return direction;
 	}
@@ -44,14 +42,9 @@ public class Frog implements IFrog {
         return scoreMax;
     }
 
-
 	public void setScore(int score) {
 		this.score += score;
 	}
-
-    public void setPosition(Case position) {
-		this.position = position;
-    }
 
     public Integer getScore() {
         return score;
@@ -101,6 +94,7 @@ public class Frog implements IFrog {
 				break;
 		}
 	}
+
 
 	public Image getFrogImage(){
 		if(playerTwo){

@@ -39,10 +39,15 @@ public class FrogInf implements  IFrog {
         return score;
     }
 
-    public void setPosition(Case position) {
-        this.position = position;
+    public void setScore(int bonus){
+        this.score += bonus;
     }
 
+
+    /**
+     * Vérifie si un tunnel couvre la case d'arrivée, appelle la fonction decalageDown ou decalageUp en fonction de la touche
+     * @param key
+     */
     public void move(Direction key) {
         switch (key) {
             case right:
@@ -85,6 +90,7 @@ public class FrogInf implements  IFrog {
                 break;
         }
     }
+
     public Image getFrogImage(){
             switch (direction) {
         case up:
@@ -98,9 +104,6 @@ public class FrogInf implements  IFrog {
     }
 		return Images.frogRightImage;
 }
-    public void setScore(int bonus){
-        this.score += bonus;
-    }
 
 }
 

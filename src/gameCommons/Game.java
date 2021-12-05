@@ -113,7 +113,7 @@ public class Game {
 		return false;
 	}
 	public void testLoseTwoPlayers() {
-		if(!environment.isSafe2(frogTwo.getPosition())){
+		if(!environment.isSafe_PlayerTwo(frogTwo.getPosition())){
 			graphic.endGameScreen("Le joueur 1 a gagné !");
 			this.partie = false;
 		}
@@ -131,6 +131,7 @@ public class Game {
 		}
 		return false;
 	}
+
 	public boolean testWinTwoPlayers() {
 		if(frog.getPosition().ord == height-1){
 				graphic.endGameScreen("Le joueur 1 à gagné !");

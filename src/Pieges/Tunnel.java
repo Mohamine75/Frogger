@@ -21,8 +21,6 @@ public class Tunnel implements IPiege {
         return position;
     }
 
-
-
     public void setPosition(Case position) {
         this.position = position;
     }

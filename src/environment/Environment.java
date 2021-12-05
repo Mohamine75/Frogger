@@ -7,12 +7,10 @@ import util.Case;
 import java.util.ArrayList;
 
 public class Environment implements IEnvironment {
-    private final Game game;
-    private ArrayList<Lane> lanes;
+    private final ArrayList<Lane> lanes;
 
-    //TODO
+
     public Environment(Game game) {
-        this.game = game;
         this.lanes = new ArrayList<>();
         lanes.add(new Lane(game, 0));
         for (int i = 1; i < game.height - 1; i++) {
@@ -25,9 +23,15 @@ public class Environment implements IEnvironment {
         lanes.add(new Lane(game, game.height-1));
     }
 
+    public Lane getLane(int ord) {
+        return lanes.get(ord);
+    }
+
+
     public boolean isWinningPosition(Case c) {
         return c.ord == lanes.size() - 1;
     }
+
 
     public boolean isSafe(Case c) {
         for (Lane l : lanes) {
@@ -35,7 +39,9 @@ public class Environment implements IEnvironment {
         }
         return true;
     }
-    public boolean isSafe2(Case c) {
+
+
+    public boolean isSafe_PlayerTwo(Case c) {
         for (Lane l : lanes) {
             if (!l.isSafeFrog2(c)) return false;
         }
@@ -46,11 +52,6 @@ public class Environment implements IEnvironment {
         for (Lane l : lanes) {
             l.update();
         }
-    }
-
-    @Override
-    public Lane getLane(int ord) {
-        return lanes.get(ord);
     }
 
     public void add(){}

@@ -38,14 +38,6 @@ public class FroggerGraphic extends JPanel implements IFroggerGraphics, KeyListe
 		frame.addKeyListener(this);
 	}
 
-	/*public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		for (Element e : elementsToDisplay) {
-			g.setColor(e.color);
-			g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
-		}
-	}*/
-
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for (Element e : elementsToDisplay) {

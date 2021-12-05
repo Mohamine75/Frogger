@@ -26,12 +26,19 @@ public class Tremplin implements IPiege {
         this.position = position;
     }
 
+
     public void addToGraphics(){
         game.getGraphic().add(new Element(position.absc,position.ord, Images.tremplinImage));
     }
 
     public boolean action(){
         game.music.PlayMusicBonus(new File("src/Music/boing.wav"));
+        if(game.isTwoPlayers) {
+            if (covers(game.getFrogTwo().getPosition())) {
+                game.getFrogTwo().move(game.getFrogTwo().getDirection());
+                return true;
+            }
+        }
         game.getFrog().move(game.getFrog().getDirection());
         return true;
     }

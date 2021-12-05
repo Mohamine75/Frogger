@@ -12,6 +12,7 @@ public class EnvInf implements IEnvironment {
     private final Game game;
     private final ArrayList<Lane> lanes;
 
+
     public EnvInf(Game game) {
         this.game = game;
         this.lanes = new ArrayList<>();
@@ -20,7 +21,6 @@ public class EnvInf implements IEnvironment {
         for (int i = 2; i < game.height + 5; i++) {
             lanes.add(new Lane(game, i, game.randomGen.nextInt(5 )+1, game.randomGen.nextBoolean(), 0.01));
         }
-        System.out.println(this);
     }
 
 
@@ -37,16 +37,12 @@ public class EnvInf implements IEnvironment {
 
     public Lane getLane(int ord) {
         for(Lane l : lanes){
-            if (l.getOrd()== ord){
+            if (l.getOrd() == ord)
                 return l;
-            }
         }
         return null;
     }
 
-    public boolean isWinningPosition(Case c) {
-        return false;
-    }
 
     public void decalageDown(){
         for (Lane l: lanes) {
@@ -62,7 +58,6 @@ public class EnvInf implements IEnvironment {
     }
 
 
-
     public void decalageUp() {
         for (Lane l: lanes) {
             l.setOrd(l.getOrd()+1);
@@ -75,6 +70,7 @@ public class EnvInf implements IEnvironment {
         }
     }
 
+
     public boolean isSafe(Case c) {
         for (int i = 0; i < lanes.size(); i++) {
             if (!lanes.get(i).isSafeFrog(c)) {
@@ -85,15 +81,20 @@ public class EnvInf implements IEnvironment {
     }
 
 
-
     public void update() {
         for (Lane lane : lanes) {
             lane.update();
         }
     }
 
-    @Override
-    public boolean isSafe2(Case c) {
+
+    public boolean isSafe_PlayerTwo(Case c) {
         return false;
     }
+
+    public boolean isWinningPosition(Case c) {
+        return false;
+    }
+
+
 }

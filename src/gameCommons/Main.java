@@ -1,5 +1,6 @@
 package gameCommons;
 
+import environment.EnvInf;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 
@@ -9,12 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
-//import frog.Frog;
-
-//import environment.Environment;
-//import frog.Frog;
-//import environment.Environment;
 
 public class Main {
 
@@ -29,7 +24,7 @@ public class Main {
 		//Cr�ation de l'interface graphique
 		IFroggerGraphics graphic = new FroggerGraphic(width, height);
 		//Cr�ation de la partie
-		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity, true, true);
+		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity, false, true);
 
 		//Boucle principale : l'environnement s'acturalise tous les tempo milisecondes
 		File file = new File("src/Music/Doom.wav");
@@ -48,11 +43,21 @@ public class Main {
 					graphic.repaint();
 					if (!game.isPartie() && !game.isTwoPlayers) {
 						clip.stop();
-						game.music.PlayMusicBonus(new File("src/Music/Naruto.wav"));
+						if (game.getEnvironment() instanceof EnvInf){
+							game.music.PlayMusicBonus(new File("src/Music/Naruto.wav"));
+						}
+						if(game.testWin()){
+							game.music.PlayMusicBonus(new File("src/Music/Victory.wav"));
+						}
+						if(game.testLose()){
+							game.music.PlayMusicBonus(new File("src/Music/Naruto.wav"));
+						}
 					}
-					if(game.testWinTwoPlayers() || (game.isTwoPlayers && !game.isPartie())){
-						clip.stop();
-						game.music.PlayMusicBonus(new File("src/Music/Victory.wav"));
+					if(game.isTwoPlayers) {
+						if (game.testWinTwoPlayers() || (game.isTwoPlayers && !game.isPartie())) {
+							clip.stop();
+							game.music.PlayMusicBonus(new File("src/Music/Victory.wav"));
+						}
 					}
 				}
 			}

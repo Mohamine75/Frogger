@@ -4,6 +4,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Classe auxilière ne servant qu'a lancer la musique
+ */
 public class PlayMusic {
     private String nom;
     public PlayMusic(String nom){
