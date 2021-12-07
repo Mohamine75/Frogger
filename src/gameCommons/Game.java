@@ -164,7 +164,7 @@ public class Game {
 			} else {
 				graphic.setFrog(frog);
 				this.graphic.add(new Element(frog.getPosition(), frog.getFrogImage()));
-				testLose();
+				//testLose();
 				testWin();
 			}
 

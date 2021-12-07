@@ -30,7 +30,7 @@ public class EnvInf implements IEnvironment {
         }
         else{
             lanes.add(new Lane(game, lanes.get(lanes.size() - 1).getOrd() + 1, game.randomGen.nextInt(10) + 1,
-                    game.randomGen.nextBoolean(), 0.01 * 1.01));
+                    game.randomGen.nextBoolean(), 0.01));
         }
 
     }

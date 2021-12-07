@@ -88,7 +88,7 @@ public class Lane {
 		// Si ligne d'eau, densité et vitesse prédéfinie.
 		if(!this.isRoad){
 			this.density = 0.15;
-			this.speed = 4;
+			this.speed = 2;
 		}
 
 		// Générateur aléatoire de pièges selon la configuration + ajout d'une piece de 8 à chaque ligne d'eau
@@ -205,13 +205,11 @@ public class Lane {
 	 * @return true si possible, false sinon
 	 */
 	public boolean isSafeObstacle(Case c) {
-		if (!pieges.isEmpty()) {
 			for (IPiege p : pieges) {
 				if (p.covers(c)) {
-					return false;
+					return true;
 				}
 			}
-		}
 		for (IObstacle obs : obstacles ) {
 			if((obs.covers(c))){
 				return false;

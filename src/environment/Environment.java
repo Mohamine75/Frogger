@@ -17,7 +17,7 @@ public class Environment implements IEnvironment {
             if(i < ((game.height-1)/2 ))
                 lanes.add(new Lane(game, i, game.randomGen.nextInt(10)+1,game.randomGen.nextBoolean() , 0.01, true));
             else {
-                lanes.add(new Lane(game, i, 5,game.randomGen.nextBoolean(), 0.04, false));
+                lanes.add(new Lane(game, i, 5,game.randomGen.nextBoolean(), 0.15, false));
             }
         }
         lanes.add(new Lane(game, game.height-1));
